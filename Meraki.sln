@@ -26,6 +26,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meraki.Cadastros.Data", "BuildContext\Cadastros\Meraki.Cadastros.Data\Meraki.Cadastros.Data.csproj", "{0320954F-DA4F-1FD9-B19A-594853B5FA94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meraki.Cadastros.Domain", "BuildContext\Cadastros\Meraki.Cadastros.Domain\Meraki.Cadastros.Domain.csproj", "{D8037B05-6CCF-39D0-7179-7E101DC18316}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85C72CFC-0D81-AC69-45E4-E59B604B6451} = {85C72CFC-0D81-AC69-45E4-E59B604B6451}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meraki.Core", "BuildContext\Core\Meraki.Core\Meraki.Core.csproj", "{85C72CFC-0D81-AC69-45E4-E59B604B6451}"
 EndProject

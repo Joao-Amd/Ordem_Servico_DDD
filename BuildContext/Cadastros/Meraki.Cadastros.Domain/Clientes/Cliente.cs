@@ -1,8 +1,9 @@
 ﻿using Meraki.Cadastros.Domain.Clientes.Enumeradores;
+using Meraki.Core.Interfaces;
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class Cliente
+    public class Cliente : IAggregateRoot
     {
         protected Cliente(string nome,
                        EnumTipoPessoa tipoPessoa,
