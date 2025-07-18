@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Meraki.Api.Controllers
+namespace Meraki.OrdemServico.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

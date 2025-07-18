@@ -1,4 +1,4 @@
-namespace Meraki.Api
+namespace Meraki.Financeiro.Api
 {
     public class WeatherForecast
     {
