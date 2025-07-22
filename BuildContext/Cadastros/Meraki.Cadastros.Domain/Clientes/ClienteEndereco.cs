@@ -1,4 +1,7 @@
-﻿namespace Meraki.Cadastros.Domain.Clientes
+﻿using Meraki.Cadastros.Domain.Value_Objects;
+using System.Runtime.ConstrainedExecution;
+
+namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteEndereco
     {
@@ -19,17 +22,18 @@
             Bairro = bairro;
             Cidade = cidade;
             Uf = uf;
-            Cep = cep;
+            Cep = new Cep(cep);
+            _validar();
         }
 
         public Guid Id { get; }
         public string Logradouro { get; private set; } = string.Empty;
-        public string? Numero { get; private set; } = string.Empty;
+        public string? Numero { get; private set; }
         public string? Complemento { get; private set; }
         public string Bairro { get; private set; } = string.Empty;
         public string Cidade { get; private set; } = string.Empty;
         public string Uf { get; private set; } = string.Empty;
-        public string Cep { get; private set; } = string.Empty;
+        public Cep Cep { get; private set; } 
 
         public virtual Cliente Cliente { get; }
 
@@ -69,7 +73,16 @@
             Bairro = bairro;
             Cidade = cidade;
             Uf = uf;
-            Cep = cep;
+            Cep = new Cep(cep);
+            _validar();
+        }
+
+        public void _validar()
+        {
+            if (string.IsNullOrWhiteSpace(Logradouro)) throw new ArgumentException("Logradouro é obrigatório.");
+            if (string.IsNullOrWhiteSpace(Bairro)) throw new ArgumentException("Bairro é obrigatório.");
+            if (string.IsNullOrWhiteSpace(Cidade)) throw new ArgumentException("Cidade é obrigatória.");
+            if (string.IsNullOrWhiteSpace(Uf) || Uf.Length != 2) throw new ArgumentException("UF inválido.");
         }
     }
 }

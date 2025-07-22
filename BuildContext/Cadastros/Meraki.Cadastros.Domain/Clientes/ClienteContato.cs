@@ -1,4 +1,6 @@
-﻿namespace Meraki.Cadastros.Domain.Clientes
+﻿using Meraki.Cadastros.Domain.Value_Objects;
+
+namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteContato
     {
@@ -10,15 +12,15 @@
             string email)
         {
             Id = codigoCliente;
-            Telefone = telefone;
-            Celular = celular;
-            Email = email;
+            Telefone = string.IsNullOrEmpty(telefone)? null : new Telefone(telefone);
+            Celular = new Celular(celular);
+            Email = new Email(email);
         }
 
         public Guid Id { get; }
-        public string? Telefone { get; private set; }
-        public string Celular { get; private set; } = string.Empty;
-        public string Email { get; private set; } = string.Empty;
+        public Telefone? Telefone { get; private set; }
+        public Celular Celular { get; private set; } 
+        public Email Email { get; private set; }
 
         public virtual Cliente Cliente { get; }
 
@@ -37,9 +39,9 @@
             string celular,
             string email)
         {
-            Telefone = telefone;
-            Celular = celular;
-            Email = email;
+            Telefone = string.IsNullOrEmpty(telefone) ? null : new Telefone(telefone);
+            Celular = new Celular(celular);
+            Email = new Email(email);
         }
     }
 }

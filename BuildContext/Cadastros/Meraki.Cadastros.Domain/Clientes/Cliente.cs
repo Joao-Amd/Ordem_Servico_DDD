@@ -1,4 +1,5 @@
 ﻿using Meraki.Cadastros.Domain.Clientes.Enumeradores;
+using Meraki.Cadastros.Domain.Value_Objects;
 using Meraki.Core.Interfaces;
 
 namespace Meraki.Cadastros.Domain.Clientes
@@ -22,6 +23,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             Id = Guid.NewGuid();
             Nome = nome;
             TipoPessoa = tipoPessoa;
+            Cpf = string.IsNullOrEmpty(cpf) ? null : new Cpf(cpf);
 
             _adcionarEndereco(logradouro,
                   numero,
@@ -37,7 +39,7 @@ namespace Meraki.Cadastros.Domain.Clientes
         public Guid Id { get; }
         public string Nome { get; private set; } = string.Empty;
         public EnumTipoPessoa TipoPessoa { get; private set; }
-        public string? Cpf { get; private set; }
+        public Cpf? Cpf { get; private set; }
 
         public virtual ClienteDadosCorporativo? DadosCorporativo { get; private set; }
         public virtual ClienteEndereco Endereco { get; private set; }
@@ -91,7 +93,7 @@ namespace Meraki.Cadastros.Domain.Clientes
         {
             Nome = nome;
             TipoPessoa = tipoPessoa;
-            Cpf = cpf;
+            Cpf = string.IsNullOrEmpty(cpf) ? null : new Cpf(cpf);
 
             Endereco.AlterarEndereco(logradouro,
                          numero,
