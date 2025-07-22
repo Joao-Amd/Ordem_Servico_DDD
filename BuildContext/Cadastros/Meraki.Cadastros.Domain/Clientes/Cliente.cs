@@ -6,38 +6,42 @@ namespace Meraki.Cadastros.Domain.Clientes
     public class Cliente : IAggregateRoot
     {
         protected Cliente(string nome,
-                       EnumTipoPessoa tipoPessoa,
-                       string? cpf,
-                       string? telefone,
-                       string celular,
-                       string email,
-                       string logradouro,
-                       string? numero,
-                       string? complemento,
-                       string bairro,
-                       string cidade,
-                       string uf,
-                       string cep)
+                          EnumTipoPessoa tipoPessoa,
+                          string? cpf,
+                          string? telefone,
+                          string celular,
+                          string email,
+                          string logradouro,
+                          string? numero,
+                          string? complemento,
+                          string bairro,
+                          string cidade,
+                          string uf,
+                          string cep)
         {
             Id = Guid.NewGuid();
+            Nome = nome;
+            TipoPessoa = tipoPessoa;
+
+            _adcionarEndereco(logradouro,
+                  numero,
+                  complemento,
+                  bairro,
+                  cidade,
+                  uf,
+                  cep);
+
+            _adicionarContato(Nome, telefone, celular, email);
         }
 
         public Guid Id { get; }
         public string Nome { get; private set; } = string.Empty;
         public EnumTipoPessoa TipoPessoa { get; private set; }
         public string? Cpf { get; private set; }
-        public string? Telefone { get; private set; }
-        public string Celular { get; private set; } = string.Empty;
-        public string Email { get; private set; } = string.Empty;
-        public string Logradouro { get; private set; } = string.Empty;
-        public string? Numero { get; private set; } = string.Empty;
-        public string? Complemento { get; private set; }
-        public string Bairro { get; private set; } = string.Empty;
-        public string Cidade { get; private set; } = string.Empty;
-        public string Uf { get; private set; } = string.Empty;
-        public string Cep { get; private set; } = string.Empty;
 
-        public virtual DadosCorporativo? DadosCorporativo { get; private set; }
+        public virtual ClienteDadosCorporativo? DadosCorporativo { get; private set; }
+        public virtual ClienteEndereco Endereco { get; private set; }
+        public virtual ClienteContato Contato { get; private set; }
 
         public static Cliente Criar(
             string nome,
@@ -53,7 +57,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             string cidade,
             string uf,
             string cep)
-        {
+        {          
             return new Cliente(
                 nome,
                 tipoPessoa,
@@ -88,16 +92,45 @@ namespace Meraki.Cadastros.Domain.Clientes
             Nome = nome;
             TipoPessoa = tipoPessoa;
             Cpf = cpf;
-            Telefone = telefone;
-            Celular = celular;
-            Email = email;
-            Logradouro = logradouro;
-            Numero = numero;
-            Complemento = complemento;
-            Bairro = bairro;
-            Cidade = cidade;
-            Uf = uf;
-            Cep = cep;
+
+            Endereco.AlterarEndereco(logradouro,
+                         numero,
+                         complemento,
+                         bairro,
+                         cidade,
+                         uf,
+                         cep);
+
+            Contato.AlterarContato(telefone, celular, email);
+        }
+
+        private void _adcionarEndereco(
+            string logradouro,
+            string? numero,
+            string? complemento,
+            string bairro,
+            string cidade,
+            string uf,
+            string cep)
+        {
+            Endereco = ClienteEndereco.Criar(
+                Id,
+                logradouro,                                            
+                numero,
+                complemento,
+                bairro,
+                cidade,
+                uf,
+                cep);
+        }
+
+        private void _adicionarContato(
+            string? nome,
+            string? telefone,
+            string celular,
+            string email)
+        {
+            Contato = ClienteContato.Criar(Id, nome, telefone, celular, email);
         }
 
         public void AdicionarDadosCorporativos(
@@ -109,7 +142,7 @@ namespace Meraki.Cadastros.Domain.Clientes
         {
             if (DadosCorporativo != null) return;
 
-            DadosCorporativo = DadosCorporativo.Criar(
+            DadosCorporativo = ClienteDadosCorporativo.Criar(
             this,
             razaoSocial,
             nomeFantasia,

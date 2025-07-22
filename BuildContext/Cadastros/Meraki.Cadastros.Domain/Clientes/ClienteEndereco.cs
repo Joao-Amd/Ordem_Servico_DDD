@@ -1,0 +1,75 @@
+﻿namespace Meraki.Cadastros.Domain.Clientes
+{
+    public class ClienteEndereco
+    {
+        public ClienteEndereco(
+            Guid codigoCliente,
+            string logradouro,
+            string? numero,
+            string? complemento,
+            string bairro,
+            string cidade,
+            string uf,
+            string cep)
+        {
+            Id = codigoCliente;
+            Logradouro = logradouro;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Cep = cep;
+        }
+
+        public Guid Id { get; }
+        public string Logradouro { get; private set; } = string.Empty;
+        public string? Numero { get; private set; } = string.Empty;
+        public string? Complemento { get; private set; }
+        public string Bairro { get; private set; } = string.Empty;
+        public string Cidade { get; private set; } = string.Empty;
+        public string Uf { get; private set; } = string.Empty;
+        public string Cep { get; private set; } = string.Empty;
+
+        public virtual Cliente Cliente { get; }
+
+        public static ClienteEndereco Criar(
+            Guid codigoCliente,
+            string logradouro,
+            string? numero,
+            string? complemento,
+            string bairro,
+            string cidade,
+            string uf,
+            string cep)
+        {
+            return new ClienteEndereco(
+                codigoCliente,
+                logradouro,
+                numero,
+                complemento,
+                bairro,
+                cidade,
+                uf,
+                cep);
+        }
+
+        public void AlterarEndereco(
+            string logradouro,
+            string? numero,
+            string? complemento,
+            string bairro,
+            string cidade,
+            string uf,
+            string cep)
+        {
+            Logradouro = logradouro;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Cep = cep;
+        }
+    }
+}
