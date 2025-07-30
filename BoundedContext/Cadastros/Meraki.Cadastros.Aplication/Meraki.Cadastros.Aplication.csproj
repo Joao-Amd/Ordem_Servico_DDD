@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Clientes\" />
+    <ProjectReference Include="..\Meraki.Cadastros.Domain\Meraki.Cadastros.Domain.csproj" />
   </ItemGroup>
 
 </Project>

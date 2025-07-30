@@ -9,31 +9,15 @@ namespace Meraki.Cadastros.Domain.Clientes
         protected Cliente(string nome,
                           EnumTipoPessoa tipoPessoa,
                           string? cpf,
-                          string? telefone,
-                          string celular,
-                          string email,
-                          string logradouro,
-                          string? numero,
-                          string? complemento,
-                          string bairro,
-                          string cidade,
-                          string uf,
-                          string cep)
+                          ClienteEndereco endereco,
+                          ClienteContato contato)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             TipoPessoa = tipoPessoa;
             Cpf = string.IsNullOrEmpty(cpf) ? null : new Cpf(cpf);
-
-            _adcionarEndereco(logradouro,
-                  numero,
-                  complemento,
-                  bairro,
-                  cidade,
-                  uf,
-                  cep);
-
-            _adicionarContato(Nome, telefone, celular, email);
+            Endereco = endereco;
+            Contato = contato;
         }
 
         public Guid Id { get; }
@@ -49,31 +33,32 @@ namespace Meraki.Cadastros.Domain.Clientes
             string nome,
             EnumTipoPessoa tipoPessoa,
             string? cpf,
-            string? telefone,
-            string celular,
-            string email,
-            string logradouro,
-            string? numero,
-            string? complemento,
-            string bairro,
-            string cidade,
-            string uf,
-            string cep)
+            string? razaoSocial,
+            string? nomeFantasia,
+            string cnpj,
+            string? inscricaoEstadual,
+            string? inscricaoMunicipal,
+            ClienteEndereco endereco,
+            ClienteContato contato)
         {          
-            return new Cliente(
+            var cliente = new Cliente(
                 nome,
                 tipoPessoa,
                 cpf,
-                telefone,
-                celular,
-                email,
-                logradouro,
-                numero,
-                complemento,
-                bairro,
-                cidade,
-                uf,
-                cep);
+                endereco,
+                contato);
+
+            if (tipoPessoa == EnumTipoPessoa.Juridica)
+            {
+                cliente.AdicionarDadosCorporativos(
+                    razaoSocial,
+                    nomeFantasia,
+                    cnpj,
+                    inscricaoEstadual,
+                    inscricaoMunicipal);
+            }
+
+            return cliente;
         }
 
         public void AlterarDados(
@@ -106,35 +91,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             Contato.AlterarContato(telefone, celular, email);
         }
 
-        private void _adcionarEndereco(
-            string logradouro,
-            string? numero,
-            string? complemento,
-            string bairro,
-            string cidade,
-            string uf,
-            string cep)
-        {
-            Endereco = ClienteEndereco.Criar(
-                Id,
-                logradouro,                                            
-                numero,
-                complemento,
-                bairro,
-                cidade,
-                uf,
-                cep);
-        }
-
-        private void _adicionarContato(
-            string? nome,
-            string? telefone,
-            string celular,
-            string email)
-        {
-            Contato = ClienteContato.Criar(Id, nome, telefone, celular, email);
-        }
-
         public void AdicionarDadosCorporativos(
             string? razaoSocial,
             string? nomeFantasia,
@@ -145,7 +101,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             if (DadosCorporativo != null) return;
 
             DadosCorporativo = ClienteDadosCorporativo.Criar(
-            this,
             razaoSocial,
             nomeFantasia,
             cnpj,

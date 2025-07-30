@@ -3,15 +3,12 @@
     public class ClienteDadosCorporativo
     {
         protected ClienteDadosCorporativo(
-            Cliente cliente,
-            string? razaoSocial,
-            string? nomeFantasia,
+            string razaoSocial,
+            string nomeFantasia,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal)
+            string inscricaoEstadual,
+            string inscricaoMunicipal)
         {
-            Id = cliente.Id;
-            Cliente = cliente;
             RazaoSocial = razaoSocial;
             NomeFantasia = nomeFantasia;
             Cnpj = cnpj;
@@ -19,25 +16,22 @@
             InscricaoMunicipal = inscricaoMunicipal;
         }
 
-        public Guid Id { get; }
-        public string? RazaoSocial { get; private set; }
-        public string? NomeFantasia { get; private set; }
+        public string RazaoSocial { get; private set; }
+        public string NomeFantasia { get; private set; }
         public string Cnpj { get; private set; } = string.Empty;
-        public string? InscricaoEstadual { get; private set; }
-        public string? InscricaoMunicipal { get; private set; }
+        public string InscricaoEstadual { get; private set; }
+        public string InscricaoMunicipal { get; private set; }
 
         public virtual Cliente Cliente { get; }
 
         public static ClienteDadosCorporativo Criar(
-            Cliente cliente,
-            string? razaoSocial,
-            string? nomeFantasia,
+            string razaoSocial,
+            string nomeFantasia,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal)
+            string inscricaoEstadual,
+            string inscricaoMunicipal)
         {
             return new ClienteDadosCorporativo(
-                cliente,
                 razaoSocial,
                 nomeFantasia,
                 cnpj,
@@ -46,11 +40,11 @@
         }
 
         public void AlterarDados(
-            string? razaoSocial,
-            string? nomeFantasia,
+            string razaoSocial,
+            string nomeFantasia,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal)
+            string inscricaoEstadual,
+            string inscricaoMunicipal)
         {
             RazaoSocial = razaoSocial;
             NomeFantasia = nomeFantasia;

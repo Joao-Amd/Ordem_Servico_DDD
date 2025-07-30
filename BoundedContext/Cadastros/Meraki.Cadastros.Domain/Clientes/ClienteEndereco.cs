@@ -1,12 +1,10 @@
 ﻿using Meraki.Cadastros.Domain.Value_Objects;
-using System.Runtime.ConstrainedExecution;
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteEndereco
     {
         public ClienteEndereco(
-            Guid codigoCliente,
             string logradouro,
             string? numero,
             string? complemento,
@@ -15,7 +13,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             string uf,
             string cep)
         {
-            Id = codigoCliente;
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
@@ -26,7 +23,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             _validar();
         }
 
-        public Guid Id { get; }
         public string Logradouro { get; private set; } = string.Empty;
         public string? Numero { get; private set; }
         public string? Complemento { get; private set; }
@@ -38,7 +34,6 @@ namespace Meraki.Cadastros.Domain.Clientes
         public virtual Cliente Cliente { get; }
 
         public static ClienteEndereco Criar(
-            Guid codigoCliente,
             string logradouro,
             string? numero,
             string? complemento,
@@ -48,7 +43,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             string cep)
         {
             return new ClienteEndereco(
-                codigoCliente,
                 logradouro,
                 numero,
                 complemento,

@@ -5,19 +5,15 @@ namespace Meraki.Cadastros.Domain.Clientes
     public class ClienteContato
     {
         protected ClienteContato(
-            Guid codigoCliente,
-            string? nome,
             string? telefone,
             string celular,
             string email)
         {
-            Id = codigoCliente;
             Telefone = string.IsNullOrEmpty(telefone)? null : new Telefone(telefone);
             Celular = new Celular(celular);
             Email = new Email(email);
         }
 
-        public Guid Id { get; }
         public Telefone? Telefone { get; private set; }
         public Celular Celular { get; private set; } 
         public Email Email { get; private set; }
@@ -25,13 +21,11 @@ namespace Meraki.Cadastros.Domain.Clientes
         public virtual Cliente Cliente { get; }
 
         public static ClienteContato Criar(
-            Guid codigoCliente,
-            string? nome,
             string? telefone,
             string celular,
             string email)
         {
-            return new ClienteContato(codigoCliente, nome, telefone, celular, email);
+            return new ClienteContato(telefone, celular, email);
         }
 
         public void AlterarContato(
