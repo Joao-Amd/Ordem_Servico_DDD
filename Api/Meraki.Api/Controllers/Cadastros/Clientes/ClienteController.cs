@@ -2,7 +2,7 @@
 
 namespace Meraki.Api.Controllers.Cadastros.Clientes
 {
-    public class ClienteController : ControllerBase
+    public class ClienteController : ControllerMain
     {
     }
 }

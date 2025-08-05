@@ -4,5 +4,6 @@
     {
         bool Notified { get; }
         List<string> Message { get; }
+
     }
 }
