@@ -9,10 +9,10 @@ namespace Meraki.Cadastros.Aplication.Clientes
 {
     public class AplicCliente
     {
-        private readonly IRepBase<Cliente> _repCliente;
+        private readonly IRepBase<Customer> _repCliente;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AplicCliente(IUnitOfWork unitOfWork, IRepBase<Cliente> repCliente)
+        public AplicCliente(IUnitOfWork unitOfWork, IRepBase<Customer> repCliente)
         {
             _unitOfWork = unitOfWork;
             _repCliente = repCliente;
@@ -20,7 +20,7 @@ namespace Meraki.Cadastros.Aplication.Clientes
 
         public void Inserir(ClienteDto dto)
         {
-            var endereco = ClienteEndereco.Criar(
+            var endereco = CustomerAddress.Criar(
                 dto.Logradouro,
                 dto.Numero,
                 dto.Complemento,
@@ -29,9 +29,9 @@ namespace Meraki.Cadastros.Aplication.Clientes
                 dto.Uf,
                 dto.Cep);
 
-            var contato = ClienteContato.Criar(dto.Telefone, dto.Celular, dto.Email);
+            var contato = CustomerContact.Criar(dto.Telefone, dto.Celular, dto.Email);
 
-            var cliente = Cliente.Criar(
+            var cliente = Customer.Criar(
                 dto.Nome,
                 dto.TipoPessoa,
                 dto.Cpf,

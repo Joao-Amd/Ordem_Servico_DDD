@@ -2,9 +2,9 @@
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class ClienteEndereco
+    public class CustomerAddress
     {
-        public ClienteEndereco(
+        public CustomerAddress(
             string logradouro,
             string? numero,
             string? complemento,
@@ -31,9 +31,9 @@ namespace Meraki.Cadastros.Domain.Clientes
         public string Uf { get; private set; } = string.Empty;
         public Cep Cep { get; private set; } 
 
-        public virtual Cliente Cliente { get; }
+        public virtual Customer Cliente { get; }
 
-        public static ClienteEndereco Criar(
+        public static CustomerAddress Criar(
             string logradouro,
             string? numero,
             string? complemento,
@@ -42,7 +42,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             string uf,
             string cep)
         {
-            return new ClienteEndereco(
+            return new CustomerAddress(
                 logradouro,
                 numero,
                 complemento,

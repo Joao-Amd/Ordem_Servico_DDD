@@ -2,9 +2,9 @@
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class ClienteContato
+    public class CustomerContact
     {
-        protected ClienteContato(
+        protected CustomerContact(
             string? telefone,
             string celular,
             string email)
@@ -18,14 +18,14 @@ namespace Meraki.Cadastros.Domain.Clientes
         public Celular Celular { get; private set; } 
         public Email Email { get; private set; }
 
-        public virtual Cliente Cliente { get; }
+        public virtual Customer Cliente { get; }
 
-        public static ClienteContato Criar(
+        public static CustomerContact Criar(
             string? telefone,
             string celular,
             string email)
         {
-            return new ClienteContato(telefone, celular, email);
+            return new CustomerContact(telefone, celular, email);
         }
 
         public void AlterarContato(

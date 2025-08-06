@@ -4,20 +4,20 @@ using Meraki.Core.Interfaces;
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class Cliente : IAggregateRoot
+    public class Customer : IAggregateRoot
     {
-        protected Cliente(string nome,
+        protected Customer(string nome,
                           EnumTipoPessoa tipoPessoa,
                           string? cpf,
-                          ClienteEndereco endereco,
-                          ClienteContato contato)
+                          CustomerAddress endereco,
+                          CustomerContact contato)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             TipoPessoa = tipoPessoa;
             Cpf = string.IsNullOrEmpty(cpf) ? null : new Cpf(cpf);
-            Endereco = endereco;
-            Contato = contato;
+            Address = endereco;
+            Contact = contato;
         }
 
         public Guid Id { get; }
@@ -25,23 +25,23 @@ namespace Meraki.Cadastros.Domain.Clientes
         public EnumTipoPessoa TipoPessoa { get; private set; }
         public Cpf? Cpf { get; private set; }
 
-        public virtual ClienteDadosCorporativo? DadosCorporativo { get; private set; }
-        public virtual ClienteEndereco Endereco { get; private set; }
-        public virtual ClienteContato Contato { get; private set; }
+        public virtual CustomerCorporate? CorporateData { get; private set; }
+        public virtual CustomerAddress Address { get; private set; }
+        public virtual CustomerContact Contact { get; private set; }
 
-        public static Cliente Criar(
+        public static Customer Criar(
             string nome,
             EnumTipoPessoa tipoPessoa,
             string? cpf,
-            string? razaoSocial,
-            string? nomeFantasia,
+            string? corporateName,
+            string? tradeName,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal,
-            ClienteEndereco endereco,
-            ClienteContato contato)
+            string? stateRegistration,
+            string? municipalRegistration,
+            CustomerAddress endereco,
+            CustomerContact contato)
         {          
-            var cliente = new Cliente(
+            var cliente = new Customer(
                 nome,
                 tipoPessoa,
                 cpf,
@@ -50,18 +50,18 @@ namespace Meraki.Cadastros.Domain.Clientes
 
             if (tipoPessoa == EnumTipoPessoa.Juridica)
             {
-                cliente.AdicionarDadosCorporativos(
-                    razaoSocial,
-                    nomeFantasia,
+                cliente.SetCorporationDate(
+                    corporateName,
+                    tradeName,
                     cnpj,
-                    inscricaoEstadual,
-                    inscricaoMunicipal);
+                    stateRegistration,
+                    municipalRegistration);
             }
 
             return cliente;
         }
 
-        public void AlterarDados(
+        public void Alter(
             string nome,
             EnumTipoPessoa tipoPessoa,
             string? cpf,
@@ -80,7 +80,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             TipoPessoa = tipoPessoa;
             Cpf = string.IsNullOrEmpty(cpf) ? null : new Cpf(cpf);
 
-            Endereco.AlterarEndereco(logradouro,
+            Address.AlterarEndereco(logradouro,
                          numero,
                          complemento,
                          bairro,
@@ -88,39 +88,39 @@ namespace Meraki.Cadastros.Domain.Clientes
                          uf,
                          cep);
 
-            Contato.AlterarContato(telefone, celular, email);
+            Contact.AlterarContato(telefone, celular, email);
         }
 
-        public void AdicionarDadosCorporativos(
-            string? razaoSocial,
-            string? nomeFantasia,
+        public void SetCorporationDate(
+            string? corporateName,
+            string? tradeName,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal)
+            string? stateRegistration,
+            string? municipalRegistration)
         {
-            if (DadosCorporativo != null) return;
+            if (CorporateData != null) return;
 
-            DadosCorporativo = ClienteDadosCorporativo.Criar(
-            razaoSocial,
-            nomeFantasia,
+            CorporateData = CustomerCorporate.Criar(
+            corporateName,
+            tradeName,
             cnpj,
-            inscricaoEstadual,
-            inscricaoMunicipal);
+            stateRegistration,
+            municipalRegistration);
         }
 
-        public void AlterarDadosCorporativos(
-            string? razaoSocial,
-            string? nomeFantasia,
+        public void AlterCorporationDate(
+            string? corporateName,
+            string? tradeName,
             string cnpj,
-            string? inscricaoEstadual,
-            string? inscricaoMunicipal)
+            string? stateRegistration,
+            string? municipalRegistration)
         {
-            DadosCorporativo?.AlterarDados(
-                razaoSocial,
-                nomeFantasia,
+            CorporateData?.Alter(
+                corporateName,
+                tradeName,
                 cnpj,
-                inscricaoEstadual,
-                inscricaoMunicipal);
+                stateRegistration,
+                municipalRegistration);
         }
     }
 }
