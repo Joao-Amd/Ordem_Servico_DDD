@@ -11,11 +11,35 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <PackageReference Include="Npgsql" Version="8.0.6" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+    <PackageReference Include="Scrutor" Version="6.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BoundedContext\Agenda\Meraki.Agenda.Aplication\Meraki.Agenda.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Agenda\Meraki.Agenda.Data\Meraki.Agenda.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Agenda\Meraki.Agenda.Domain\Meraki.Agenda.Domain.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Cadastros\Meraki.Cadastros.Aplication\Meraki.Cadastros.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Cadastros\Meraki.Cadastros.Data\Meraki.Cadastros.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Cadastros\Meraki.Cadastros.Domain\Meraki.Cadastros.Domain.csproj" />
     <ProjectReference Include="..\..\BoundedContext\Core\Meraki.Core\Meraki.Core.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Estoque\Meraki.Estoque.Aplication\Meraki.Estoque.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Estoque\Meraki.Estoque.Data\Meraki.Estoque.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Estoque\Meraki.Estoque.Domain\Meraki.Estoque.Domain.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Orcamentos\Meraki.Orcamento.Aplication\Meraki.Orcamento.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Orcamentos\Meraki.Orcamento.Data\Meraki.Orcamento.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Orcamentos\Meraki.Orcamento.Domain\Meraki.Orcamento.Domain.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\OrdemServico\Meraki.OrdemServico.Aplication\Meraki.OrdemServico.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\OrdemServico\Meraki.OrdemServico.Data\Meraki.OrdemServico.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\OrdemServico\Meraki.OrdemServico.Domain\Meraki.OrdemServico.Domain.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Servicos\Meraki.Servicos.Aplication\Meraki.Servicos.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Servicos\Meraki.Servicos.Data\Meraki.Servicos.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Servicos\Meraki.Servicos.Domain\Meraki.Servicos.Domain.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Vendas\Meraki.Vendas.Aplication\Meraki.Vendas.Aplication.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Vendas\Meraki.Vendas.Data\Meraki.Vendas.Data.csproj" />
+    <ProjectReference Include="..\..\BoundedContext\Vendas\Meraki.Vendas.Domain\Meraki.Vendas.Domain.csproj" />
   </ItemGroup>
 
 </Project>

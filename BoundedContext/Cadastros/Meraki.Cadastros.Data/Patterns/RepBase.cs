@@ -9,7 +9,7 @@ namespace Meraki.Cadastros.Data.Patterns
     {
         private readonly DbContext _context;
         private readonly DbSet<T> _dbSet;
-        public RepBase(Contexto contexto)
+        public RepBase(ContextCadastros contexto)
         {
             _context = contexto;
             _dbSet = _context.Set<T>();

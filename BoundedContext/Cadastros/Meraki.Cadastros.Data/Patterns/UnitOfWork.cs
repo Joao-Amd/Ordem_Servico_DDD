@@ -7,8 +7,8 @@ namespace Meraki.Cadastros.Data.Patterns
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly Contexto _contexto;
-        public UnitOfWork(Contexto contexto)
+        private readonly ContextCadastros _contexto;
+        public UnitOfWork(ContextCadastros contexto)
         {
             _contexto = contexto;
         }

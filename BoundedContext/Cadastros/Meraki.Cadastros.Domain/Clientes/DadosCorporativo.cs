@@ -1,8 +1,8 @@
 ﻿namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class CustomerCorporate
+    public class DadosCorporativo
     {
-        protected CustomerCorporate(
+        protected DadosCorporativo(
             string razaoSocial,
             string nomeFantasia,
             string cnpj,
@@ -22,16 +22,16 @@
         public string InscricaoEstadual { get; private set; }
         public string InscricaoMunicipal { get; private set; }
 
-        public virtual Customer Cliente { get; }
+        public virtual Cliente Cliente { get; }
 
-        public static CustomerCorporate Criar(
+        public static DadosCorporativo Criar(
             string razaoSocial,
             string nomeFantasia,
             string cnpj,
             string inscricaoEstadual,
             string inscricaoMunicipal)
         {
-            return new CustomerCorporate(
+            return new DadosCorporativo(
                 razaoSocial,
                 nomeFantasia,
                 cnpj,
@@ -39,7 +39,7 @@
                 inscricaoMunicipal);
         }
 
-        public void Alter(
+        public void Atualizar(
             string razaoSocial,
             string nomeFantasia,
             string cnpj,
