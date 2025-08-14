@@ -2,6 +2,8 @@
 {
     public class Cpf
     {
+        public Cpf(){}
+
         public Cpf(string numero)
         {
             _validar(numero);

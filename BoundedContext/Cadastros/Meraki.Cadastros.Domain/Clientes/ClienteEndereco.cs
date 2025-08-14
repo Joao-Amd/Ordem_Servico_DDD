@@ -4,6 +4,8 @@ namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteEndereco
     {
+        public ClienteEndereco(){}
+
         public ClienteEndereco(
             string logradouro,
             string? numero,

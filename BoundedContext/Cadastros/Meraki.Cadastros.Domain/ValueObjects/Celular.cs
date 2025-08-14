@@ -2,6 +2,8 @@
 {
     public class Celular
     {
+        public Celular(){}
+
         public string Numero { get; }
 
         public Celular(string numero)

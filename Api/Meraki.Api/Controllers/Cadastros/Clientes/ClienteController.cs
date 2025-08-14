@@ -17,7 +17,7 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
             _aplicCliente = aplicCliente;
         }
 
-        [HttpPost("inserir")]
+        [HttpPost]
         public async Task<ActionResult> Inserir([FromBody] ClienteDto dto)
         {
             _aplicCliente.Inserir(dto);

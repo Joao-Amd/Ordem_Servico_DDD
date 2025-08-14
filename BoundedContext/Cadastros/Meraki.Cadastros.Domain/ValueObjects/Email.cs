@@ -2,6 +2,8 @@
 {
     public class Email
     {
+        public Email() { }
+
         public Email(string endereco)
         {
             if (string.IsNullOrWhiteSpace(endereco))

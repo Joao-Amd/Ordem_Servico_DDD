@@ -2,6 +2,8 @@
 {
     public class Telefone
     {
+        public Telefone(){}
+
         public Telefone(string numero)
         {
             if (string.IsNullOrWhiteSpace(numero))

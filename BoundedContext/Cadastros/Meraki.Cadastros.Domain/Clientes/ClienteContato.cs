@@ -4,7 +4,9 @@ namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteContato
     {
-        protected ClienteContato(
+        public ClienteContato(){ }
+
+        public ClienteContato(
             string? telefone,
             string celular,
             string email)

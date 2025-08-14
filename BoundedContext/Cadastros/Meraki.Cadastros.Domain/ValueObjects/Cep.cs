@@ -4,8 +4,9 @@ namespace Meraki.Cadastros.Domain.Value_Objects
 {
     public class Cep
     {
-        public string Numero { get; }
+        public Cep(){}
 
+        public string Numero { get; }
         public Cep(string numero)
         {
             var cepNumerico = new string(numero.Where(char.IsDigit).ToArray());

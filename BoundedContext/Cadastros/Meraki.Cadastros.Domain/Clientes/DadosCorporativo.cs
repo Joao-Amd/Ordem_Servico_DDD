@@ -2,7 +2,9 @@
 {
     public class DadosCorporativo
     {
-        protected DadosCorporativo(
+        public DadosCorporativo(){}
+
+        public DadosCorporativo(
             string razaoSocial,
             string nomeFantasia,
             string cnpj,

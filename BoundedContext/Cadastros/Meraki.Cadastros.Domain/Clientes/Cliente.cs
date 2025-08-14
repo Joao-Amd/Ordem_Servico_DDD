@@ -6,6 +6,7 @@ namespace Meraki.Cadastros.Domain.Clientes
 {
     public class Cliente : IAggregateRoot
     {
+        public Cliente(){ }
         protected Cliente(string nome,
                           EnumTipoPessoa tipoPessoa,
                           string? cpf,
