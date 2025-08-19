@@ -8,7 +8,7 @@ namespace Meraki.Api.Configuration
         public static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ContextCadastros>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("ContextoLog")));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

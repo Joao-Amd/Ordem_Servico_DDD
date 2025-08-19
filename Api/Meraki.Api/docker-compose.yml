@@ -1,14 +1,6 @@
-services:
-  meraki.api:
-    build: .
-    ports:
-      - "8080:8080"
-      - "8081:8081"
-    environment:
-      ConnectionStrings__DefaultConnection: Host=postgres-db;Port=5432;Database=meraki_db;Username=postgres;Password=admin123
-    depends_on:
-      - postgres-db
+version: '3.8'
 
+services:
   postgres-db:
     image: postgres:latest
     container_name: meraki_postgres
