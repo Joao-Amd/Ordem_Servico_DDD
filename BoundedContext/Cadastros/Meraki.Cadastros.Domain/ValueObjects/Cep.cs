@@ -1,6 +1,4 @@
-﻿using System.Runtime.ConstrainedExecution;
-
-namespace Meraki.Cadastros.Domain.Value_Objects
+﻿namespace Meraki.Cadastros.Domain.Value_Objects
 {
     public class Cep
     {

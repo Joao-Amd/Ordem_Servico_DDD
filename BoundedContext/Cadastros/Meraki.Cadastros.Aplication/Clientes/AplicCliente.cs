@@ -1,13 +1,11 @@
 ﻿using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
-using Meraki.Cadastros.Domain.Value_Objects;
 using Meraki.Core.Patterns.Repositorys;
 using Meraki.Core.Patterns.UnitOfWorks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Meraki.Cadastros.Aplication.Clientes
 {
-    public class AplicCliente
+    public class AplicCliente : IAplicCliente
     {
         private readonly IRepBase<Cliente> _repCliente;
         private readonly IUnitOfWork _unitOfWork;
