@@ -23,5 +23,7 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
             _aplicCliente.Inserir(dto);
             return CustomResponse(HttpStatusCode.Created);
         }
+
+
     }
 }

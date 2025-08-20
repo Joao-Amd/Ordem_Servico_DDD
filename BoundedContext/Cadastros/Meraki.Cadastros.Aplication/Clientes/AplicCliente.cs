@@ -1,4 +1,5 @@
-﻿using Meraki.Cadastros.Domain.Clientes;
+﻿using Meraki.Cadastros.Aplication.Clientes.ViewModels;
+using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
 using Meraki.Core.Patterns.Repositorys;
 using Meraki.Core.Patterns.UnitOfWorks;
@@ -14,6 +15,11 @@ namespace Meraki.Cadastros.Aplication.Clientes
         {
             _unitOfWork = unitOfWork;
             _repCliente = repCliente;
+        }
+
+        public List<ClienteViewModel> Listar()
+        {
+
         }
 
         public void Inserir(ClienteDto dto)
