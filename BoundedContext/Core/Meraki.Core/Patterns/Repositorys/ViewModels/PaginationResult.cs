@@ -2,7 +2,6 @@
 {
     public class PaginationResult<TViewModel>
     {
-
         public int Total { get; set; }
         public int PaginaAtual { get; set; }
         public int TotalPaginas { get; set; }

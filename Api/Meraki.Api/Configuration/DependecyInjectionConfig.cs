@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using Meraki.Cadastros.Data.Base;
+using Meraki.Cadastros.Data.Patterns;
+using Meraki.Core.Patterns.Repositorys;
+using System.Reflection;
 
 namespace Meraki.Api.Configuration
 {
@@ -33,6 +36,8 @@ namespace Meraki.Api.Configuration
                 .AddClasses()
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+
+            services.AddScoped(typeof(IRepBaseCadastros<>), typeof(RepBaseCadastros<>));
 
             return services;
         }

@@ -1,16 +1,15 @@
-﻿using Meraki.Cadastros.Domain.Clientes;
+﻿using Meraki.Cadastros.Data.Base;
+using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
-using Meraki.Core.Patterns.Repositorys;
 using Meraki.Core.Patterns.UnitOfWorks;
-
 namespace Meraki.Cadastros.Aplication.Clientes
 {
     public class AplicCliente : IAplicCliente
     {
-        private readonly IRepBase<Cliente> _repCliente;
+        private readonly IRepBaseCadastros<Cliente> _repCliente;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AplicCliente(IUnitOfWork unitOfWork, IRepBase<Cliente> repCliente)
+        public AplicCliente(IUnitOfWork unitOfWork, IRepBaseCadastros<Cliente> repCliente)
         {
             _unitOfWork = unitOfWork;
             _repCliente = repCliente;

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Meraki.Cadastros.Data\Meraki.Cadastros.Data.csproj" />
     <ProjectReference Include="..\Meraki.Cadastros.Domain\Meraki.Cadastros.Domain.csproj" />
   </ItemGroup>
 

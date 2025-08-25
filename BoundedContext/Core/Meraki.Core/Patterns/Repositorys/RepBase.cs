@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Meraki.Cadastros.Data.Patterns
 {
-    public class RepBase<T, TContext> : IRepBase<T>, IDisposable
+    public class RepBase<T, TContext> : IRepBase<T, TContext>, IDisposable
         where T : class, IAggregateRoot
         where TContext : DbContext
     {
@@ -91,6 +91,16 @@ namespace Meraki.Cadastros.Data.Patterns
                 TotalPaginas = totalPaginas,
                 Content = viewModels
             };
+        }
+
+        public async Task<List<T>> Teste(int pagina, int tamanhoPagina)
+        {
+            var entidades = await _dbSet
+                .Skip((pagina - 1) * tamanhoPagina)
+                .Take(tamanhoPagina)
+                .ToListAsync();
+
+            return entidades;
         }
     }
 }

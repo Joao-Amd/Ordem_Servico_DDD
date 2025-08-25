@@ -1,5 +1,7 @@
 ﻿using Meraki.Api.Controllers.Core;
 using Meraki.Cadastros.Aplication.Clientes;
+using Meraki.Cadastros.Data.Base;
+using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
 using Meraki.Core.Notificador;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,12 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
     public class ClienteController : ControllerMain
     {
         private readonly IAplicCliente _aplicCliente;
+        private readonly IRepBaseCadastros<Cliente> _repCliente;
 
-        public ClienteController(INotification notificador, IAplicCliente aplicCliente) : base(notificador)
+        public ClienteController(INotification notificador, IAplicCliente aplicCliente, IRepBaseCadastros<Cliente> repCliente) : base(notificador)
         {
             _aplicCliente = aplicCliente;
+            _repCliente = repCliente;
         }
 
         [HttpPost]
@@ -25,5 +29,12 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         }
 
 
+        [HttpGet]
+        public async Task<ActionResult> Listar()
+        {
+            var teste = await _repCliente.Teste(1, 10);
+
+            return CustomResponse(HttpStatusCode.Accepted, teste);
+        }
     }
 }
