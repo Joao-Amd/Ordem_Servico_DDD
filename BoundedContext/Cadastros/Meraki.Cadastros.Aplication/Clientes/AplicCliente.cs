@@ -1,4 +1,5 @@
-﻿using Meraki.Cadastros.Data.Base;
+﻿using Meraki.Cadastros.Aplication.Clientes.ViewModels;
+using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
 using Meraki.Core.Patterns.UnitOfWorks;
@@ -42,6 +43,30 @@ namespace Meraki.Cadastros.Aplication.Clientes
 
             _repCliente.InserirAsync(cliente);
             _unitOfWork.Commit();
+        }
+
+        public async Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto)
+        {
+            var cliente  = await _repCliente.GetByIdAsync(idCliente)
+                ?? throw new ArgumentException("Cliente de id {idCliente} não encontrado.");
+
+            cliente.Atualizar(dto.Nome,
+                              dto.TipoPessoa,
+                              dto.Cpf,
+                              dto.Telefone, 
+                              dto.Celular,
+                              dto.Email,
+                              dto.Logradouro,
+                              dto.Numero,
+                              dto.Complemento,
+                              dto.Bairro,
+                              dto.Cidade,
+                              dto.Uf,
+                              dto.Cep);
+
+            _unitOfWork.Commit();
+
+            return ClienteViewModel.Criar(cliente);
         }
     }
 }

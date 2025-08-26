@@ -28,13 +28,18 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
             return CustomResponse(HttpStatusCode.Created);
         }
 
+        [HttpPut("{idCliente}")]  
+        public async Task<ActionResult> Alterar([FromRoute] Guid idCliente, [FromBody] ClienteDto dto)
+        {
+            return CustomResponse(HttpStatusCode.OK, await _aplicCliente.Alterar(idCliente, dto));
+        }
 
         [HttpGet]
         public async Task<ActionResult> Listar()
         {
             var teste = await _repCliente.Teste(1, 10);
 
-            return CustomResponse(HttpStatusCode.Accepted, teste);
+            return CustomResponse(HttpStatusCode.OK, teste);
         }
     }
 }
