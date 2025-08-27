@@ -37,7 +37,7 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         [HttpGet]
         public async Task<ActionResult> Listar()
         {
-            var teste = await _repCliente.Teste(1, 10);
+            var teste = await _repCliente.ListarPaginadoAsync(1, 10);
 
             return CustomResponse(HttpStatusCode.OK, teste);
         }

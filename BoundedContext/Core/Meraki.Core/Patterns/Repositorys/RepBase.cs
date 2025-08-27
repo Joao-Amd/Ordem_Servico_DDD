@@ -69,31 +69,7 @@ namespace Meraki.Cadastros.Data.Patterns
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task<PaginationResult<TViewModel>> ListarPaginadoAsync<TViewModel>(
-            int pagina,
-            int tamanhoPagina,
-            Func<T, TViewModel> map)
-        {
-            var total = await _dbSet.CountAsync();
-            var totalPaginas = (int)Math.Ceiling(total / (double)tamanhoPagina);
-
-            var entidades = await _dbSet
-                .Skip((pagina - 1) * tamanhoPagina)
-                .Take(tamanhoPagina)
-                .ToListAsync();
-
-            var viewModels = entidades.Select(map);
-
-            return new PaginationResult<TViewModel>
-            {
-                Total = total,
-                PaginaAtual = pagina,
-                TotalPaginas = totalPaginas,
-                Content = viewModels
-            };
-        }
-
-        public async Task<List<T>> Teste(int pagina, int tamanhoPagina)
+        public async Task<List<T>> ListarPaginadoAsync(int pagina, int tamanhoPagina)
         {
             var entidades = await _dbSet
                 .Skip((pagina - 1) * tamanhoPagina)

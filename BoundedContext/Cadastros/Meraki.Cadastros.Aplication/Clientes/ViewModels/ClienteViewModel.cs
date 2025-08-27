@@ -1,5 +1,6 @@
 ﻿using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Enumeradores;
+using Meraki.Core.Mappers;
 
 namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
 {
@@ -8,6 +9,7 @@ namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public EnumTipoPessoa TipoPessoa { get; set; }
+        [MapFrom("Cpf.Numero")]
         public string? Cpf { get; set; }
         public virtual DadosCorporativosViewModel DadosCorporativo { get; set; }
         public virtual ClienteEnderecoViewModel Endereco { get; set; }
