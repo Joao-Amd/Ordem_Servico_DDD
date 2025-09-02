@@ -1,6 +1,6 @@
 ﻿using Meraki.Core.Interfaces;
+using Meraki.Core.Mappers;
 using Meraki.Core.Patterns.Repositorys;
-using Meraki.Core.Patterns.Repositorys.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -69,14 +69,28 @@ namespace Meraki.Cadastros.Data.Patterns
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task<List<T>> ListarPaginadoAsync(int pagina, int tamanhoPagina)
+        public async Task<List<T>> ListarPaginadoAsync<TView>(int pagina, int tamanhoPagina)
+            where TView : class, new()
         {
-            var entidades = await _dbSet
-                .Skip((pagina - 1) * tamanhoPagina)
-                .Take(tamanhoPagina)
-                .ToListAsync();
+            try
+            {
+                var mapper = new Mapper();
 
-            return entidades;
+                var entidades = await _dbSet
+                    .Skip((pagina - 1) * tamanhoPagina)
+                    .Take(tamanhoPagina)
+                    .ToListAsync();
+
+                var teste = mapper.ToMapper<T, TView>();
+
+                return entidades;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

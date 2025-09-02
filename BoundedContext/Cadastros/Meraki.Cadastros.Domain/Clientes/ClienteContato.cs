@@ -4,34 +4,41 @@ namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteContato
     {
-        public ClienteContato(){ }
+        public ClienteContato() { }
 
         public ClienteContato(
-            string? telefone,
+            Cliente cliente,
+            string telefone,
             string celular,
             string email)
         {
-            Telefone = string.IsNullOrEmpty(telefone)? null : new Telefone(telefone);
+            Id = Guid.NewGuid();
+            IdCliente = cliente.Id;
+            Cliente = cliente;
+            Telefone = string.IsNullOrEmpty(telefone) ? null : new Telefone(telefone);
             Celular = new Celular(celular);
             Email = new Email(email);
         }
 
-        public Telefone? Telefone { get; private set; }
-        public Celular Celular { get; private set; } 
+        public Guid Id { get; }
+        public Guid IdCliente { get; }
+        public Telefone Telefone { get; private set; }
+        public Celular Celular { get; private set; }
         public Email Email { get; private set; }
 
         public virtual Cliente Cliente { get; }
 
         public static ClienteContato Criar(
-            string? telefone,
+            Cliente cliente,
+            string telefone,
             string celular,
             string email)
         {
-            return new ClienteContato(telefone, celular, email);
+            return new ClienteContato(cliente, telefone, celular, email);
         }
 
         public void AlterarContato(
-            string? telefone,
+            string telefone,
             string celular,
             string email)
         {

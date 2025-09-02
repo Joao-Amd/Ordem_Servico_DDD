@@ -18,17 +18,6 @@ namespace Meraki.Cadastros.Aplication.Clientes
 
         public void Inserir(ClienteDto dto)
         {
-            var endereco = ClienteEndereco.Criar(
-                dto.Logradouro,
-                dto.Numero,
-                dto.Complemento,
-                dto.Bairro,
-                dto.Cidade,
-                dto.Uf,
-                dto.Cep);
-
-            var contato = ClienteContato.Criar(dto.Telefone, dto.Celular, dto.Email);
-
             var cliente = Cliente.Criar(
                 dto.Nome,
                 dto.TipoPessoa,
@@ -37,9 +26,18 @@ namespace Meraki.Cadastros.Aplication.Clientes
                 dto.NomeFantasia,
                 dto.Cnpj,
                 dto.InscricaoEstadual,
-                dto.InscricaoMunicipal,
-                endereco,
-                contato);
+                dto.InscricaoMunicipal);
+
+            cliente.AtribuirContato(dto.Telefone, dto.Celular, dto.Email);
+
+            cliente.AtribuirEndereco(
+                dto.Logradouro,
+                dto.Numero,
+                dto.Complemento,
+                dto.Bairro,
+                dto.Cidade,
+                dto.Uf,
+                dto.Cep);
 
             _repCliente.InserirAsync(cliente);
             _unitOfWork.Commit();

@@ -10,7 +10,7 @@ namespace Meraki.Core.Mappers
         /// mapeando propriedades por nome ou caminho especificado via atributo [MapFrom].
         /// Suporta propriedades aninhadas como "Endereco.Cidade.Nome".
         /// </summary>
-        public Expression<Func<TSource, TDest>> Gerar<TSource, TDest>() where TDest : new()
+        public Expression<Func<TSource, TDest>> ToMapper<TSource, TDest>() where TDest : new()
         {
             // Obtém os tipos de origem e destino
             var sourceType = typeof(TSource);

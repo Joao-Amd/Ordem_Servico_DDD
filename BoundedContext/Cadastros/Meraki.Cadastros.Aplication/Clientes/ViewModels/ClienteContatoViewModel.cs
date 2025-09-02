@@ -12,7 +12,7 @@ namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
         {
             return new ClienteContatoViewModel
             {
-                Telefone = clienteContato.Telefone.Numero,
+                Telefone = clienteContato.Telefone?.Numero,
                 Celular = clienteContato.Celular.Numero,
                 Email = clienteContato.Email.Endereco
             };

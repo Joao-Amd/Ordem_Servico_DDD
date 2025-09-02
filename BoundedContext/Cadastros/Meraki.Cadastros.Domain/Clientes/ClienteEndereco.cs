@@ -4,17 +4,21 @@ namespace Meraki.Cadastros.Domain.Clientes
 {
     public class ClienteEndereco
     {
-        public ClienteEndereco(){}
+        public ClienteEndereco() { }
 
         public ClienteEndereco(
+            Cliente cliente,
             string logradouro,
-            string? numero,
-            string? complemento,
+            string numero,
+            string complemento,
             string bairro,
             string cidade,
             string uf,
             string cep)
         {
+            Id = Guid.NewGuid();
+            IdCliente = cliente.Id;
+            Cliente = cliente;
             Logradouro = logradouro;
             Numero = numero;
             Complemento = complemento;
@@ -24,27 +28,30 @@ namespace Meraki.Cadastros.Domain.Clientes
             Cep = new Cep(cep);
             _validar();
         }
-
+        public Guid Id { get; }
+        public Guid IdCliente { get; }
         public string Logradouro { get; private set; } = string.Empty;
-        public string? Numero { get; private set; }
-        public string? Complemento { get; private set; }
+        public string Numero { get; private set; }
+        public string Complemento { get; private set; }
         public string Bairro { get; private set; } = string.Empty;
         public string Cidade { get; private set; } = string.Empty;
         public string Uf { get; private set; } = string.Empty;
-        public Cep Cep { get; private set; } 
+        public Cep Cep { get; private set; }
 
         public virtual Cliente Cliente { get; }
 
         public static ClienteEndereco Criar(
+            Cliente cliente,
             string logradouro,
-            string? numero,
-            string? complemento,
+            string numero,
+            string complemento,
             string bairro,
             string cidade,
             string uf,
             string cep)
         {
             return new ClienteEndereco(
+                cliente,
                 logradouro,
                 numero,
                 complemento,
@@ -56,8 +63,8 @@ namespace Meraki.Cadastros.Domain.Clientes
 
         public void AlterarEndereco(
             string logradouro,
-            string? numero,
-            string? complemento,
+            string numero,
+            string complemento,
             string bairro,
             string cidade,
             string uf,
