@@ -1,0 +1,24 @@
+﻿
+dotnet ef migrations add Cliente --project ../../BoundedContext\Cadastros\Meraki.Cadastros.Data --startup-project .
+
+adicionar alterações no banco
+dotnet ef database update --project ../../BoundedContext\Cadastros\Meraki.Cadastros.Data --startup-project .
+
+
+--- 
+{
+  "nome": "João Vitor de Almeida Medeiros",
+  "tipoPessoa": 0,
+  "logradouro": "string",
+  "numero": "1255",
+  "complemento": "string",
+  "bairro": "string",
+  "cidade": "string",
+  "uf": "sc",
+  "cep": "88810300",
+  "celular": "48998014050",
+  "email": "joao@gmail.com",
+  "nomeFantasia": "string",
+  "cpf": "09738921961"
+
+}

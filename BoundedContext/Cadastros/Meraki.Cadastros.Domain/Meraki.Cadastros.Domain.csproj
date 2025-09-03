@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Meraki.Core\Meraki.Core.csproj" />
+    <Compile Remove="Usuarios\**" />
+    <EmbeddedResource Remove="Usuarios\**" />
+    <None Remove="Usuarios\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Usuarios\" />
+    <ProjectReference Include="..\..\Core\Meraki.Core\Meraki.Core.csproj" />
   </ItemGroup>
 
 </Project>

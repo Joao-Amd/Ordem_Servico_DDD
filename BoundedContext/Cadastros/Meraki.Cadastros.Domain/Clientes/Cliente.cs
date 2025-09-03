@@ -21,10 +21,6 @@ namespace Meraki.Cadastros.Domain.Clientes
         public string Nome { get; private set; } = string.Empty;
         public EnumTipoPessoa TipoPessoa { get; private set; }
         public Cpf Cpf { get; private set; }
-        public Telefone Telefone { get; private set; }
-        public Celular Celular { get; private set; }
-        public Email Email { get; private set; }
-
         public virtual DadosCorporativo DadosCorporativo { get; private set; }
         public virtual ClienteEndereco Endereco { get; private set; }
         public virtual ClienteContato Contato { get; private set; }
