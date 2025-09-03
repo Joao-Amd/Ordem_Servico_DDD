@@ -11,6 +11,7 @@ namespace Meraki.Cadastros.Data.Maps.Clientes
             builder.ToTable("cliente_dados_corporativo");
             builder.HasKey(p => p.Id);
 
+            builder.Property(c => c.Id).HasColumnName("id").ValueGeneratedNever();
             builder.Property(c => c.RazaoSocial).HasColumnName("razao_social").HasMaxLength(200);
             builder.Property(c => c.Cnpj).HasColumnName("cnpj").HasMaxLength(14);
             builder.Property(c => c.NomeFantasia).HasColumnName("nome_fantasia").HasMaxLength(200);
@@ -19,7 +20,7 @@ namespace Meraki.Cadastros.Data.Maps.Clientes
 
             builder.HasOne(p => p.Cliente)
                 .WithOne(c => c.DadosCorporativo)
-                .HasForeignKey<DadosCorporativo>(p => p.IdCliente)
+                .HasForeignKey<DadosCorporativo>(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

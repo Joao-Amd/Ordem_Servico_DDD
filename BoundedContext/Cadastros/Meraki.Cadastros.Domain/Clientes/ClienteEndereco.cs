@@ -16,8 +16,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             string uf,
             string cep)
         {
-            Id = Guid.NewGuid();
-            IdCliente = cliente.Id;
+            Id = cliente.Id;
             Cliente = cliente;
             Logradouro = logradouro;
             Numero = numero;
@@ -29,7 +28,6 @@ namespace Meraki.Cadastros.Domain.Clientes
             _validar();
         }
         public Guid Id { get; }
-        public Guid IdCliente { get; }
         public string Logradouro { get; private set; } = string.Empty;
         public string Numero { get; private set; }
         public string Complemento { get; private set; }

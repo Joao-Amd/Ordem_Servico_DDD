@@ -12,8 +12,7 @@
             string inscricaoEstadual,
             string inscricaoMunicipal)
         {
-            Id = Guid.NewGuid();
-            IdCliente = cliente.Id;
+            Id = cliente.Id;
             Cliente = cliente;
             RazaoSocial = razaoSocial;
             NomeFantasia = nomeFantasia;
@@ -22,7 +21,6 @@
             InscricaoMunicipal = inscricaoMunicipal;
         }
         public Guid Id { get; }
-        public Guid IdCliente { get; }
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string Cnpj { get; private set; } = string.Empty;

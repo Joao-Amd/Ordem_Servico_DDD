@@ -12,8 +12,7 @@ namespace Meraki.Cadastros.Domain.Clientes
             string celular,
             string email)
         {
-            Id = Guid.NewGuid();
-            IdCliente = cliente.Id;
+            Id = cliente.Id;
             Cliente = cliente;
             Telefone = string.IsNullOrEmpty(telefone) ? null : new Telefone(telefone);
             Celular = new Celular(celular);
@@ -21,7 +20,6 @@ namespace Meraki.Cadastros.Domain.Clientes
         }
 
         public Guid Id { get; }
-        public Guid IdCliente { get; }
         public Telefone Telefone { get; private set; }
         public Celular Celular { get; private set; }
         public Email Email { get; private set; }

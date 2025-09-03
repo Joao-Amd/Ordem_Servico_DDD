@@ -33,7 +33,7 @@ namespace Meraki.Cadastros.Data.Maps.Clientes
 
             builder.HasOne(p => p.Cliente)
                 .WithOne(c => c.Contato)
-                .HasForeignKey<ClienteContato>(p => p.IdCliente)
+                .HasForeignKey<ClienteContato>(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
