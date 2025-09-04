@@ -30,7 +30,6 @@ namespace Meraki.Cadastros.Data.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
                     telefone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     celular = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     email = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true)
@@ -39,8 +38,8 @@ namespace Meraki.Cadastros.Data.Migrations
                 {
                     table.PrimaryKey("PK_cliente_contato", x => x.id);
                     table.ForeignKey(
-                        name: "FK_cliente_contato_cliente_IdCliente",
-                        column: x => x.IdCliente,
+                        name: "FK_cliente_contato_cliente_id",
+                        column: x => x.id,
                         principalTable: "cliente",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -50,8 +49,7 @@ namespace Meraki.Cadastros.Data.Migrations
                 name: "cliente_dados_corporativo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     razao_social = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     nome_fantasia = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     cnpj = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: true),
@@ -60,10 +58,10 @@ namespace Meraki.Cadastros.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cliente_dados_corporativo", x => x.Id);
+                    table.PrimaryKey("PK_cliente_dados_corporativo", x => x.id);
                     table.ForeignKey(
-                        name: "FK_cliente_dados_corporativo_cliente_IdCliente",
-                        column: x => x.IdCliente,
+                        name: "FK_cliente_dados_corporativo_cliente_id",
+                        column: x => x.id,
                         principalTable: "cliente",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -73,8 +71,7 @@ namespace Meraki.Cadastros.Data.Migrations
                 name: "cliente_endereco",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     logradouro = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     numero = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     complemento = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
@@ -85,32 +82,14 @@ namespace Meraki.Cadastros.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cliente_endereco", x => x.Id);
+                    table.PrimaryKey("PK_cliente_endereco", x => x.id);
                     table.ForeignKey(
-                        name: "FK_cliente_endereco_cliente_IdCliente",
-                        column: x => x.IdCliente,
+                        name: "FK_cliente_endereco_cliente_id",
+                        column: x => x.id,
                         principalTable: "cliente",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_cliente_contato_IdCliente",
-                table: "cliente_contato",
-                column: "IdCliente",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_cliente_dados_corporativo_IdCliente",
-                table: "cliente_dados_corporativo",
-                column: "IdCliente",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_cliente_endereco_IdCliente",
-                table: "cliente_endereco",
-                column: "IdCliente",
-                unique: true);
         }
 
         /// <inheritdoc />

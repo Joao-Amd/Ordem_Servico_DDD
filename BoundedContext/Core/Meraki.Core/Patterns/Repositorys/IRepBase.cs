@@ -17,6 +17,6 @@ namespace Meraki.Core.Patterns.Repositorys
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByIdAsync(Guid id);
         Task InserirAsync(T entity);
-        Task<List<T>> ListarPaginadoAsync<TView>(int pagina, int tamanhoPagina) where TView : class, new();
+        Task<List<TView>> ListarPaginadoAsync<TView>(int pagina, int tamanhoPagina) where TView : class, new();
     }
 }

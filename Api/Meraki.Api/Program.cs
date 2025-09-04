@@ -1,5 +1,6 @@
 using Meraki.Api.Configuration;
 using Meraki.Api.Extension;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,12 @@ builder.Services.ResolveDependencies();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfig();
 builder.Services.AddDbContexts(builder.Configuration);
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.Formatting = Formatting.Indented;
+    });
 
 var app = builder.Build();
 

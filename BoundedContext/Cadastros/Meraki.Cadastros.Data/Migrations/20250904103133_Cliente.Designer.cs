@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Meraki.Cadastros.Data.Migrations
 {
     [DbContext(typeof(ContextCadastros))]
-    [Migration("20250902233519_Cliente")]
+    [Migration("20250904103133_Cliente")]
     partial class Cliente
     {
         /// <inheritdoc />
@@ -21,6 +21,9 @@ namespace Meraki.Cadastros.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.19")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -52,13 +55,7 @@ namespace Meraki.Cadastros.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
 
                     b.ToTable("cliente_contato", (string)null);
                 });
@@ -66,8 +63,8 @@ namespace Meraki.Cadastros.Data.Migrations
             modelBuilder.Entity("Meraki.Cadastros.Domain.Clientes.ClienteEndereco", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Bairro")
                         .IsRequired()
@@ -85,9 +82,6 @@ namespace Meraki.Cadastros.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("complemento");
-
-                    b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
@@ -108,25 +102,19 @@ namespace Meraki.Cadastros.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
-
                     b.ToTable("cliente_endereco", (string)null);
                 });
 
             modelBuilder.Entity("Meraki.Cadastros.Domain.Clientes.DadosCorporativo", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Cnpj")
                         .HasMaxLength(14)
                         .HasColumnType("character varying(14)")
                         .HasColumnName("cnpj");
-
-                    b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("InscricaoEstadual")
                         .HasMaxLength(20)
@@ -149,9 +137,6 @@ namespace Meraki.Cadastros.Data.Migrations
                         .HasColumnName("razao_social");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
 
                     b.ToTable("cliente_dados_corporativo", (string)null);
                 });
@@ -184,7 +169,7 @@ namespace Meraki.Cadastros.Data.Migrations
                 {
                     b.HasOne("Meraki.Cadastros.Domain.Clientes.Cliente", "Cliente")
                         .WithOne("Contato")
-                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.ClienteContato", "IdCliente")
+                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.ClienteContato", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -257,7 +242,7 @@ namespace Meraki.Cadastros.Data.Migrations
                 {
                     b.HasOne("Meraki.Cadastros.Domain.Clientes.Cliente", "Cliente")
                         .WithOne("Endereco")
-                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.ClienteEndereco", "IdCliente")
+                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.ClienteEndereco", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -289,7 +274,7 @@ namespace Meraki.Cadastros.Data.Migrations
                 {
                     b.HasOne("Meraki.Cadastros.Domain.Clientes.Cliente", "Cliente")
                         .WithOne("DadosCorporativo")
-                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.DadosCorporativo", "IdCliente")
+                        .HasForeignKey("Meraki.Cadastros.Domain.Clientes.DadosCorporativo", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
