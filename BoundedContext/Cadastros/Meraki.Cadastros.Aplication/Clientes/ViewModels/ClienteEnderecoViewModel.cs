@@ -6,8 +6,8 @@ namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
     public class ClienteEnderecoViewModel
     {
         public string Logradouro { get; private set; } = string.Empty;
-        public string? Numero { get; private set; }
-        public string? Complemento { get; private set; }
+        public string Numero { get; private set; }
+        public string Complemento { get; private set; }
         public string Bairro { get; private set; } = string.Empty;
         public string Cidade { get; private set; } = string.Empty;
         public string Uf { get; private set; } = string.Empty;

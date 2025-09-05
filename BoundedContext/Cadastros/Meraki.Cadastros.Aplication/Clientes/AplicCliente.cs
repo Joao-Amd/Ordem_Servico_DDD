@@ -46,7 +46,7 @@ namespace Meraki.Cadastros.Aplication.Clientes
         public async Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto)
         {
             var cliente  = await _repCliente.GetByIdAsync(idCliente)
-                ?? throw new ArgumentException("Cliente de id {idCliente} não encontrado.");
+                ?? throw new ArgumentException("Cliente de id {id cliente} não encontrado.");
 
             cliente.Atualizar(dto.Nome,
                               dto.TipoPessoa,

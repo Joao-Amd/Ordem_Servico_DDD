@@ -10,7 +10,7 @@ namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
         public string Nome { get; set; }
         public EnumTipoPessoa TipoPessoa { get; set; }
         [MapFrom("Cpf.Numero")]
-        public string? Cpf { get; set; }
+        public string Cpf { get; set; }
         public virtual DadosCorporativosViewModel DadosCorporativo { get; set; }
         public virtual ClienteEnderecoViewModel Endereco { get; set; }
         public virtual ClienteContatoViewModel Contato { get; set; }
