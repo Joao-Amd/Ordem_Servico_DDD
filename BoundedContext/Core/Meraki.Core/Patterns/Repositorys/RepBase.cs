@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace Meraki.Cadastros.Data.Patterns
 {
     public class RepBase<T, TContext> : IRepBase<T, TContext>, IDisposable
-        where T : class, IAggregateRoot
+        where T : class
         where TContext : DbContext
     {
         private readonly TContext _context;

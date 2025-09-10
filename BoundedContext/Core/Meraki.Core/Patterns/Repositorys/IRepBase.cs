@@ -1,12 +1,10 @@
-﻿using Meraki.Core.Interfaces;
-using Meraki.Core.Patterns.Repositorys.ViewModels;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Meraki.Core.Patterns.Repositorys
 {
     public interface IRepBase<T, TContext> : IDisposable
-        where T : IAggregateRoot
+        where T : class
         where TContext : DbContext
     {
         Task<bool> AnyAsync();

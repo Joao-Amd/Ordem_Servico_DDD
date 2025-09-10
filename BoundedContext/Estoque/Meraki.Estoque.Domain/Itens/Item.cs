@@ -1,8 +1,9 @@
-﻿using Meraki.Estoque.Domain.Unidades;
+﻿using Meraki.Core.Interfaces;
+using Meraki.Estoque.Domain.Unidades;
 
 namespace Meraki.Estoque.Domain.Itens
 {
-    public class Item
+    public class Item 
     {
         public Item(
             int identificacao,

@@ -11,4 +11,8 @@
     <Folder Include="Unidades\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Meraki.Estoque.Data\Meraki.Estoque.Data.csproj" />
+  </ItemGroup>
+
 </Project>
