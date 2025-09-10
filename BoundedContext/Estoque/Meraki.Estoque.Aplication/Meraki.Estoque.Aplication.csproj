@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Estoques\" />
+    <Folder Include="Unidades\" />
+  </ItemGroup>
+
 </Project>

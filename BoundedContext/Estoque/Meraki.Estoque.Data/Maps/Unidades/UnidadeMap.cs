@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Meraki.Estoque.Data.Maps.Unidades
 {
-    public class UnidadeMap : IEntityTypeConfiguration<Unidadade>
+    public class UnidadeMap : IEntityTypeConfiguration<Unidade>
     {
-        public void Configure(EntityTypeBuilder<Unidadade> builder)
+        public void Configure(EntityTypeBuilder<Unidade> builder)
         {
             builder.ToTable("unidadade");
             builder.HasKey(p => p.Id);

@@ -1,6 +1,6 @@
 ﻿namespace Meraki.Estoque.Domain.Unidades
 {
-    public class Unidadade
+    public class Unidade
     {
         public Guid Id { get; }
         public string Sigla { get; }
