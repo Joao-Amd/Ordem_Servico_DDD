@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Meraki.Core.Base.QuerysParams;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Meraki.Core.Patterns.Repositorys
@@ -15,6 +16,6 @@ namespace Meraki.Core.Patterns.Repositorys
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByIdAsync(Guid id);
         Task InserirAsync(T entity);
-        Task<List<TView>> ListarPaginadoAsync<TView>(int pagina, int tamanhoPagina) where TView : class, new();
+        Task<List<TView>> ListarPaginadoAsync<TView>(QueryParams query) where TView : class, new();
     }
 }

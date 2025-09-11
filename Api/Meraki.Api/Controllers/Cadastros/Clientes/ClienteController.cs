@@ -4,6 +4,7 @@ using Meraki.Cadastros.Aplication.Clientes.ViewModels;
 using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
+using Meraki.Core.Base.QuerysParams;
 using Meraki.Core.Notificador;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -36,9 +37,9 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         }
 
         [HttpGet]
-        public async Task<ActionResult> Listar()
+        public async Task<ActionResult> Listar([FromQuery] QueryParams queryParams)
         {
-            var teste = await _repCliente.ListarPaginadoAsync<ClienteViewModel>(1, 10);
+            var teste = await _repCliente.ListarPaginadoAsync<ClienteViewModel>(queryParams);
 
             return CustomResponse(HttpStatusCode.OK, teste);
         }

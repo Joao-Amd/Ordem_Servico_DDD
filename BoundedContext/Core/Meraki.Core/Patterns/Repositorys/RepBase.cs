@@ -1,4 +1,5 @@
-﻿using Meraki.Core.Interfaces;
+﻿using Meraki.Core.Base.QuerysParams;
+using Meraki.Core.Interfaces;
 using Meraki.Core.Mappers;
 using Meraki.Core.Patterns.Repositorys;
 using Microsoft.EntityFrameworkCore;
@@ -69,7 +70,7 @@ namespace Meraki.Cadastros.Data.Patterns
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task<List<TView>> ListarPaginadoAsync<TView>(int pagina, int tamanhoPagina)
+        public async Task<List<TView>> ListarPaginadoAsync<TView>(QueryParams queryParams)
             where TView : class, new()
         {
             try
@@ -78,10 +79,21 @@ namespace Meraki.Cadastros.Data.Patterns
                 var expression = mapper.ToMapper<T, TView>();
                 var mapFunc = expression.Compile();
 
-                var entidades = await _dbSet
-                    .Skip((pagina - 1) * tamanhoPagina)
-                    .Take(tamanhoPagina)
-                    .ToListAsync();
+                var query = _dbSet.AsQueryable();
+                if (!string.IsNullOrEmpty(queryParams.SearchTerm))
+                    query = query.Where(e => EF.Functions.Like(EF.Property<string>(e, "Nome"), $"%{queryParams.SearchTerm}%"));
+
+                if (!string.IsNullOrEmpty(queryParams.SortBy))
+                {
+                    query = queryParams.SortDescending
+                        ? query.OrderByDescending(e => EF.Property<object>(e, queryParams.SortBy))
+                        : query.OrderBy(e => EF.Property<object>(e, queryParams.SortBy));
+                }
+
+                var entidades = await query
+                            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+                            .Take(queryParams.PageSize)
+                            .ToListAsync();
 
                 return entidades.Select(mapFunc).ToList();
             }
