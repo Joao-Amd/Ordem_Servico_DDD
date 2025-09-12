@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Meraki.Cadastros.Data.Patterns
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWorkCadastros : IUnitOfWork
     {
         private readonly ContextCadastros _contexto;
-        public UnitOfWork(ContextCadastros contexto)
+        public UnitOfWorkCadastros(ContextCadastros contexto)
         {
             _contexto = contexto;
         }
 
-        public void Commit()
+        public async Task CommitAsync()
         {
             try
             {
@@ -25,7 +25,8 @@ namespace Meraki.Cadastros.Data.Patterns
                     ValidationContext validationContext = new ValidationContext(item);
                     Validator.ValidateObject(item, validationContext);
                 }
-                _contexto.SaveChanges();
+
+                await _contexto.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -43,26 +44,26 @@ namespace Meraki.Cadastros.Data.Patterns
         {
             try
             {
-                foreach (EntityEntry item in (from x in _contexto.ChangeTracker.Entries() where x.State != EntityState.Unchanged select x).ToList())
+                foreach (var entry in _contexto.ChangeTracker.Entries().Where(x => x.State != EntityState.Unchanged))
                 {
-                    switch (item.State)
+                    switch (entry.State)
                     {
                         case EntityState.Modified:
-                            item.CurrentValues.SetValues(item.OriginalValues);
-                            item.State = EntityState.Unchanged;
+                            entry.CurrentValues.SetValues(entry.OriginalValues);
+                            entry.State = EntityState.Unchanged;
                             break;
                         case EntityState.Added:
-                            item.State = EntityState.Detached;
+                            entry.State = EntityState.Detached;
                             break;
                         case EntityState.Deleted:
-                            item.State = EntityState.Unchanged;
+                            entry.State = EntityState.Unchanged;
                             break;
                     }
                 }
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Erro ao executar rollback", e);
             }
         }
     }

@@ -40,7 +40,7 @@ namespace Meraki.Cadastros.Aplication.Clientes
                 dto.Cep);
 
             _repCliente.InserirAsync(cliente);
-            _unitOfWork.Commit();
+            _unitOfWork.CommitAsync().Wait();
         }
 
         public async Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto)
@@ -62,7 +62,7 @@ namespace Meraki.Cadastros.Aplication.Clientes
                               dto.Uf,
                               dto.Cep);
 
-            _unitOfWork.Commit();
+            _unitOfWork.CommitAsync().Wait();
 
             return ClienteViewModel.Criar(cliente);
         }

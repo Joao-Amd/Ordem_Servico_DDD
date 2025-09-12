@@ -48,7 +48,7 @@ namespace Meraki.Estoque.Aplication.Itens
                 itemDto.IdUnidade,
                 itemDto.Ativo);
 
-            unitOfWork.Commit();
+            unitOfWork.CommitAsync();
         }
 
         public void Inserir(ItemDto itemDto)
@@ -64,7 +64,7 @@ namespace Meraki.Estoque.Aplication.Itens
                 unidade);
 
             _repositorioItem.InserirAsync(item).Wait();
-            unitOfWork.Commit();
+            unitOfWork.CommitAsync();
         }
     }
 }

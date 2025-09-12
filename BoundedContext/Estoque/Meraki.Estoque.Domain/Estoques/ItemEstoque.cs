@@ -4,6 +4,7 @@ namespace Meraki.Estoque.Domain.Estoques
 {
     public class ItemEstoque
     {
+        public ItemEstoque(){}
         public ItemEstoque(Item item) 
         {
             Id = Guid.NewGuid();

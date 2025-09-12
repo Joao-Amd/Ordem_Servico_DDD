@@ -5,6 +5,7 @@ namespace Meraki.Estoque.Domain.Itens
 {
     public class Item 
     {
+        public Item(){}
         public Item(
             int identificacao,
             string descricao,

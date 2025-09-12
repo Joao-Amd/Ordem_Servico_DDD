@@ -80,10 +80,19 @@ namespace Meraki.Cadastros.Data.Patterns
                 var mapFunc = expression.Compile();
 
                 var query = _dbSet.AsQueryable();
-                if (!string.IsNullOrEmpty(queryParams.SearchTerm))
-                    query = query.Where(e => EF.Functions.Like(EF.Property<string>(e, "Nome"), $"%{queryParams.SearchTerm}%"));
 
-                if (!string.IsNullOrEmpty(queryParams.SortBy))
+                var propriedades = typeof(T).GetProperties().Select(p => p.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                if (!string.IsNullOrEmpty(queryParams.SearchBy) && !string.IsNullOrEmpty(queryParams.SearchTerm))
+                {
+                    if (!propriedades.Contains(queryParams.SearchBy))
+                        throw new ArgumentException($"Propriedade '{queryParams.SearchBy}' não encontrada na entidade {typeof(T).Name}.");
+
+                    query = query.Where(e =>
+                        EF.Functions.Like(EF.Property<string>(e, queryParams.SearchBy), $"%{queryParams.SearchTerm}%"));
+                }
+
+                if (!string.IsNullOrEmpty(queryParams.SortBy) && propriedades.Contains(queryParams.SortBy))
                 {
                     query = queryParams.SortDescending
                         ? query.OrderByDescending(e => EF.Property<object>(e, queryParams.SortBy))
@@ -91,17 +100,16 @@ namespace Meraki.Cadastros.Data.Patterns
                 }
 
                 var entidades = await query
-                            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
-                            .Take(queryParams.PageSize)
-                            .ToListAsync();
+                    .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+                    .Take(queryParams.PageSize)
+                    .ToListAsync();
 
                 return entidades.Select(mapFunc).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new InvalidOperationException($"Erro ao listar dados paginados {ex.Message}");
             }
-
         }
     }
 }

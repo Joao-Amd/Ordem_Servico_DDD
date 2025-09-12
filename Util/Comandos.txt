@@ -22,3 +22,21 @@ dotnet ef database update --project ../../BoundedContext\Cadastros\Meraki.Cadast
   "cpf": "09738921961"
 
 }
+
+{
+  "nome": "Carlos da Silva",
+  "tipoPessoa": 0,
+  "logradouro": "Rua das Flores",
+  "numero": "123",
+  "complemento": "Apto 45",
+  "bairro": "Centro",
+  "cidade": "Criciúma",
+  "uf": "SC",
+  "cep": "88800-000",
+  "telefone": "(48) 3432-1000",
+  "celular": "(48) 99999-1234",
+  "email": "joao.silva@example.com",
+  "cpf": "12345678909",
+  "inscricaoEstadual": "IS123456789",
+  "inscricaoMunicipal": "IM987654321"
+}
