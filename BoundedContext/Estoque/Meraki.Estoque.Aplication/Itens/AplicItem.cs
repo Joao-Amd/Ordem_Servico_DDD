@@ -1,5 +1,5 @@
 ﻿using Meraki.Cadastros.Data.Base;
-using Meraki.Core.Patterns.UnitOfWorks;
+using Meraki.Cadastros.Data.Patterns;
 using Meraki.Estoque.Aplication.Dtos;
 using Meraki.Estoque.Aplication.Itens.ViewModels;
 using Meraki.Estoque.Domain.Itens;
@@ -11,11 +11,11 @@ namespace Meraki.Estoque.Aplication.Itens
     {
         private readonly IRepBaseEstoque<Item> _repositorioItem;
         private readonly IRepBaseEstoque<Unidade> _repositorioUnidade;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWorkEstoque unitOfWork;
 
         public AplicItem(IRepBaseEstoque<Item> repositorioItem,
             IRepBaseEstoque<Unidade> repositorioUnidade,
-            IUnitOfWork unitOfWork)
+            IUnitOfWorkEstoque unitOfWork)
         {
             _repositorioItem = repositorioItem;
             _repositorioUnidade = repositorioUnidade;

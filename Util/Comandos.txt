@@ -1,8 +1,7 @@
-﻿
-dotnet ef migrations add Cliente --project ../../BoundedContext\Cadastros\Meraki.Cadastros.Data --startup-project .
+﻿dotnet ef migrations add Cliente --project ../../BoundedContext/Cadastros/Meraki.Cadastros.Data --startup-project . --context ContextCadastros
 
 adicionar alterações no banco
-dotnet ef database update --project ../../BoundedContext\Cadastros\Meraki.Cadastros.Data --startup-project .
+dotnet ef database update --project ../../BoundedContext/Cadastros/Meraki.Cadastros.Data --startup-project . --context ContextCadastros
 
 
 --- 

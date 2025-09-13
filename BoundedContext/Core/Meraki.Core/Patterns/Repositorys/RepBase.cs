@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Meraki.Cadastros.Data.Patterns
 {
-    public class RepBase<T, TContext> : IRepBase<T, TContext>, IDisposable
+    public class RepBase<T, TContext> : IRepBase<T, TContext>
         where T : class
         where TContext : DbContext
     {
@@ -42,12 +42,6 @@ namespace Meraki.Cadastros.Data.Patterns
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)
                 _dbSet.Remove(entity);
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-            GC.SuppressFinalize(this);
         }
 
         public async Task<List<T>> GetAsync()

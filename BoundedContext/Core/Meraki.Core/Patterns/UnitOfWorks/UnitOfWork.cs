@@ -1,15 +1,13 @@
-﻿using Meraki.Core.Patterns.UnitOfWorks;
-using Meraki.Estoque.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Meraki.Cadastros.Data.Patterns
+namespace Meraki.Core.Patterns.UnitOfWorks
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<TContext> : IUnitOfWork<TContext>
+        where TContext : DbContext
     {
-        private readonly ContextEstoque _contexto;
-        public UnitOfWork(ContextEstoque contexto)
+        private readonly TContext _contexto;
+        public UnitOfWork(TContext contexto)
         {
             _contexto = contexto;
         }
@@ -32,7 +30,7 @@ namespace Meraki.Cadastros.Data.Patterns
             catch (DbUpdateException e)
             {
                 Rollback();
-                throw new Exception(e.Message);
+                throw new Exception("Erro ao salvar no banco", e);
             }
             catch (ValidationException e)
             {

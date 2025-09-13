@@ -26,7 +26,7 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         [HttpPost]
         public async Task<ActionResult> Inserir([FromBody] ClienteDto dto)
         {
-            _aplicCliente.Inserir(dto);
+              _aplicCliente.Inserir(dto);
             return CustomResponse(HttpStatusCode.Created);
         }
 
@@ -39,9 +39,9 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         [HttpGet]
         public async Task<ActionResult> Listar([FromQuery] QueryParams queryParams)
         {
-            var teste = await _repCliente.ListarPaginadoAsync<ClienteViewModel>(queryParams);
+            var clientes = await _repCliente.ListarPaginadoAsync<ClienteViewModel>(queryParams);
 
-            return CustomResponse(HttpStatusCode.OK, teste);
+            return CustomResponse(HttpStatusCode.OK, clientes);
         }
     }
 }

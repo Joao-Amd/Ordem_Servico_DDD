@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Meraki.Core.Patterns.Repositorys
 {
-    public interface IRepBase<T, TContext> : IDisposable
+    public interface IRepBase<T, TContext> 
         where T : class
         where TContext : DbContext
     {

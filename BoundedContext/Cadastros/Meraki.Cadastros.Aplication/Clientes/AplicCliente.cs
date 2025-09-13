@@ -1,22 +1,22 @@
 ﻿using Meraki.Cadastros.Aplication.Clientes.ViewModels;
 using Meraki.Cadastros.Data.Base;
+using Meraki.Cadastros.Data.Patterns;
 using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
-using Meraki.Core.Patterns.UnitOfWorks;
 namespace Meraki.Cadastros.Aplication.Clientes
 {
     public class AplicCliente : IAplicCliente
     {
         private readonly IRepBaseCadastros<Cliente> _repCliente;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkCadastros _unitOfWork;
 
-        public AplicCliente(IUnitOfWork unitOfWork, IRepBaseCadastros<Cliente> repCliente)
+        public AplicCliente(IUnitOfWorkCadastros unitOfWork, IRepBaseCadastros<Cliente> repCliente)
         {
             _unitOfWork = unitOfWork;
             _repCliente = repCliente;
         }
 
-        public void Inserir(ClienteDto dto)
+        public async Task Inserir(ClienteDto dto)
         {
             var cliente = Cliente.Criar(
                 dto.Nome,
@@ -39,8 +39,8 @@ namespace Meraki.Cadastros.Aplication.Clientes
                 dto.Uf,
                 dto.Cep);
 
-            _repCliente.InserirAsync(cliente);
-            _unitOfWork.CommitAsync().Wait();
+            await _repCliente.InserirAsync(cliente);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto)
