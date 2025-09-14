@@ -4,7 +4,6 @@ using Meraki.Cadastros.Aplication.Clientes.ViewModels;
 using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Domain.Clientes;
 using Meraki.Cadastros.Domain.Clientes.Dtos;
-using Meraki.Core.Base.QuerysParams;
 using Meraki.Core.Notificador;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -12,15 +11,13 @@ using System.Net;
 namespace Meraki.Api.Controllers.Cadastros.Clientes
 {
     [Route("Cadastros/Cliente")]
-    public class ClienteController : ControllerMain
+    public class ClienteController : ControllerMainListing< IRepBaseCadastros<Cliente>, ClienteViewModel>
     {
         private readonly IAplicCliente _aplicCliente;
         private readonly IRepBaseCadastros<Cliente> _repCliente;
 
-        public ClienteController(INotification notificador, IAplicCliente aplicCliente, IRepBaseCadastros<Cliente> repCliente) : base(notificador)
+        public ClienteController(INotification notificador, IRepBaseCadastros<Cliente> rep) : base(notificador, rep)
         {
-            _aplicCliente = aplicCliente;
-            _repCliente = repCliente;
         }
 
         [HttpPost]
@@ -34,14 +31,6 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         public async Task<ActionResult> Alterar([FromRoute] Guid idCliente, [FromBody] ClienteDto dto)
         {
             return CustomResponse(HttpStatusCode.OK, await _aplicCliente.Alterar(idCliente, dto));
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Listar([FromQuery] QueryParams queryParams)
-        {
-            var clientes = await _repCliente.ListarPaginadoAsync<ClienteViewModel>(queryParams);
-
-            return CustomResponse(HttpStatusCode.OK, clientes);
         }
     }
 }
