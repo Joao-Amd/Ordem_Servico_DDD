@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Meraki.Cadastros.Data.Migrations
 {
     [DbContext(typeof(ContextCadastros))]
-    [Migration("20250913120323_ajustecliente")]
-    partial class ajustecliente
+    [Migration("20250916105109_Cliente")]
+    partial class Cliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

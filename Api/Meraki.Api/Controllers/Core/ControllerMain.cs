@@ -9,7 +9,7 @@ namespace Meraki.Api.Controllers.Core
     {
         private readonly INotification _notification;
 
-        protected ControllerMain(INotification notificador)
+        public ControllerMain(INotification notificador)
         {
             _notification = notificador;
         }

@@ -64,6 +64,11 @@ namespace Meraki.Cadastros.Data.Patterns
             await _dbSet.AddAsync(entity);
         }
 
+        public async Task InserirAsync(List<T> entitys)
+        {
+            await _dbSet.AddRangeAsync(entitys);
+        }
+
         public async Task<List<TView>> ListarPaginadoAsync<TView>(QueryParams queryParams)
             where TView : class, new()
         {

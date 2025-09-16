@@ -1,5 +1,4 @@
 using Meraki.Api.Configuration;
-using Meraki.Api.Extension;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,5 +31,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+scope.ServiceProvider.GetRequiredService<DataBaseInitializer>().Initialize();
+
 
 app.Run();
