@@ -43,7 +43,7 @@ namespace Meraki.Cadastros.Aplication.Clientes
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto)
+        public async Task Alterar(Guid idCliente, ClienteDto dto)
         {
             var cliente  = await _repCliente.GetByIdAsync(idCliente)
                 ?? throw new ArgumentException("Cliente de id {id cliente} não encontrado.");
@@ -63,8 +63,6 @@ namespace Meraki.Cadastros.Aplication.Clientes
                               dto.Cep);
 
             _unitOfWork.CommitAsync().Wait();
-
-            return ClienteViewModel.Criar(cliente);
         }
     }
 }

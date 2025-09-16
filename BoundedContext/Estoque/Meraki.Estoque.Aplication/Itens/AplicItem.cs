@@ -22,23 +22,9 @@ namespace Meraki.Estoque.Aplication.Itens
             this.unitOfWork = unitOfWork;
         }
 
-        public List<ItemViewModel> Listar()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ItemViewModel ObterPorId(Guid idItem)
+        public async Task Atualizar(Guid idItem, ItemDto itemDto)
         {
             var item = _repositorioItem.GetByIdAsync(idItem).Result;
-            if (item == null)
-                throw new KeyNotFoundException($"Item não encontrado para o Id {idItem} informado.");
-
-            return ItemViewModel.Criar(item);
-        }
-
-        public void Atualizar(ItemDto itemDto)
-        {
-            var item = _repositorioItem.GetByIdAsync(itemDto.Id).Result;
             if (item == null)
                 throw new KeyNotFoundException($"Item não encontrado para o Id {itemDto} informado.");
 
@@ -48,10 +34,10 @@ namespace Meraki.Estoque.Aplication.Itens
                 itemDto.IdUnidade,
                 itemDto.Ativo);
 
-            unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync();
         }
 
-        public void Inserir(ItemDto itemDto)
+        public async Task Inserir(ItemDto itemDto)
         {
             var unidade = _repositorioUnidade.GetByIdAsync(itemDto.IdUnidade).Result;
             if (unidade == null)
@@ -63,8 +49,8 @@ namespace Meraki.Estoque.Aplication.Itens
                 itemDto.Preco,
                 unidade);
 
-            _repositorioItem.InserirAsync(item).Wait();
-            unitOfWork.CommitAsync();
+           await _repositorioItem.InserirAsync(item);
+           await unitOfWork.CommitAsync();
         }
     }
 }

@@ -51,7 +51,8 @@ namespace Meraki.Api.Controllers.Cadastros.Clientes
         [HttpPut("{idCliente}")]  
         public async Task<ActionResult> Alterar([FromRoute] Guid idCliente, [FromBody] ClienteDto dto)
         {
-            return CustomResponse(HttpStatusCode.OK, await _aplicCliente.Alterar(idCliente, dto));
+            await _aplicCliente.Alterar(idCliente, dto);
+            return CustomResponse(HttpStatusCode.OK);
         }
     }
 }

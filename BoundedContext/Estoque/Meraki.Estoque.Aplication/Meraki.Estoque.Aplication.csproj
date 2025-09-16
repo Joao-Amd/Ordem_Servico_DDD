@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Estoques\" />
-    <Folder Include="Unidades\" />
+    <Compile Remove="Estoques\**" />
+    <Compile Remove="Unidades\**" />
+    <EmbeddedResource Remove="Estoques\**" />
+    <EmbeddedResource Remove="Unidades\**" />
+    <None Remove="Estoques\**" />
+    <None Remove="Unidades\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -38,6 +38,7 @@ namespace Meraki.Api.Configuration
                 .WithScopedLifetime());
 
             services.AddScoped(typeof(IRepBaseCadastros<>), typeof(RepBaseCadastros<>));
+            services.AddScoped<DataBaseInitializer>();
 
             return services;
         }

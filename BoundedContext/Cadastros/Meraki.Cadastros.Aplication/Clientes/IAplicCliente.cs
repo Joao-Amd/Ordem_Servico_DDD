@@ -6,6 +6,6 @@ namespace Meraki.Cadastros.Aplication.Clientes
     public interface IAplicCliente
     {
         Task Inserir(ClienteDto dto);
-        Task<ClienteViewModel> Alterar(Guid idCliente, ClienteDto dto);
+        Task Alterar(Guid idCliente, ClienteDto dto);
     }
 }
