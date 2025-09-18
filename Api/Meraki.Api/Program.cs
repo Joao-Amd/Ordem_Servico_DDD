@@ -30,6 +30,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+var projectRoot = app.Services.GetRequiredService<IWebHostEnvironment>().ContentRootPath;
+DockerComposeConfig.RunDockerCompose(projectRoot);
+
 using var scope = app.Services.CreateScope();
 scope.ServiceProvider.GetRequiredService<DataBaseInitializer>().Initialize();
 

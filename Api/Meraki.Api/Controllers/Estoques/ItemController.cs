@@ -2,8 +2,8 @@
 using Meraki.Cadastros.Data.Base;
 using Meraki.Core.Base.QuerysParams;
 using Meraki.Core.Notificador;
-using Meraki.Estoque.Aplication.Dtos;
 using Meraki.Estoque.Aplication.Itens;
+using Meraki.Estoque.Aplication.Itens.Dtos;
 using Meraki.Estoque.Aplication.Itens.ViewModels;
 using Meraki.Estoque.Domain.Itens;
 using Microsoft.AspNetCore.Mvc;

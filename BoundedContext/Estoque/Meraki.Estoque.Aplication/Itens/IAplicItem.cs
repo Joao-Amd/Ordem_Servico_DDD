@@ -1,4 +1,4 @@
-﻿using Meraki.Estoque.Aplication.Dtos;
+﻿using Meraki.Estoque.Aplication.Itens.Dtos;
 
 namespace Meraki.Estoque.Aplication.Itens
 {

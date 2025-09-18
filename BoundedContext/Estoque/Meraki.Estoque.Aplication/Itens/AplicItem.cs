@@ -1,6 +1,6 @@
 ﻿using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Data.Patterns;
-using Meraki.Estoque.Aplication.Dtos;
+using Meraki.Estoque.Aplication.Itens.Dtos;
 using Meraki.Estoque.Aplication.Itens.ViewModels;
 using Meraki.Estoque.Domain.Itens;
 using Meraki.Estoque.Domain.Unidades;

@@ -21,5 +21,11 @@ namespace Meraki.Estoque.Domain.Estoques
         {
             return new ItemEstoque(item);
         }
+
+        public void AtualizarSaldo(decimal quantidade)
+        {
+            Saldo = quantidade;
+            DataAtualizacao = DateTime.Now;
+        }
     }
 }

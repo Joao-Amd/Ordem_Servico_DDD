@@ -1,4 +1,4 @@
-﻿namespace Meraki.Estoque.Aplication.Dtos
+﻿namespace Meraki.Estoque.Aplication.Itens.Dtos
 {
     public class ItemDto
     {
