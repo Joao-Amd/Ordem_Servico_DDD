@@ -6,11 +6,20 @@ using Meraki.Estoque.Domain.Itens;
 
 namespace Meraki.Estoque.Aplication.Estoques
 {
-    public class AplicItemEstoqueEstoque
+    public class AplicItemEstoqueEstoque : IAplicItemEstoque
     {
         private readonly IRepBaseEstoque<ItemEstoque> _repositorioItemEstoque;
         private readonly IRepBaseEstoque<Item> _repositorioItem;
-        private readonly IUnitOfWorkEstoque unitOfWork;
+        private readonly IUnitOfWorkEstoque _unitOfWork;
+
+        public AplicItemEstoqueEstoque(IRepBaseEstoque<ItemEstoque> repositorioItemEstoque,
+                                       IRepBaseEstoque<Item> repositorioItem,
+                                       IUnitOfWorkEstoque unitOfWork)
+        {
+            _repositorioItemEstoque = repositorioItemEstoque;
+            _repositorioItem = repositorioItem;
+            _unitOfWork = unitOfWork;
+        }
 
         public async Task Atualizar(Guid idItemEstoque, ItemEstoqueDto itemEstoqueDto)
         {
@@ -21,7 +30,7 @@ namespace Meraki.Estoque.Aplication.Estoques
 
             itemEstoque.AtualizarSaldo(itemEstoqueDto.Saldo);
 
-            await unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task Inserir(ItemEstoqueDto itemEstoqueDto)
@@ -30,7 +39,7 @@ namespace Meraki.Estoque.Aplication.Estoques
             var itemEstoque = ItemEstoque.Criar(item);
 
             await _repositorioItemEstoque.InserirAsync(itemEstoque);
-            await unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

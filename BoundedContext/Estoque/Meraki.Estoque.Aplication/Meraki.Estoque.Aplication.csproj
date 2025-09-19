@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Unidades\**" />
-    <EmbeddedResource Remove="Unidades\**" />
-    <None Remove="Unidades\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Meraki.Estoque.Data\Meraki.Estoque.Data.csproj" />
   </ItemGroup>
 

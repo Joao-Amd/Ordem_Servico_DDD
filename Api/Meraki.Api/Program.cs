@@ -30,9 +30,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+//Roda o docker-compose para subir os containers no ambiente
 var projectRoot = app.Services.GetRequiredService<IWebHostEnvironment>().ContentRootPath;
 DockerComposeConfig.RunDockerCompose(projectRoot);
 
+//Roda os migrations pendentes no ambiente de desenvolvimento
 using var scope = app.Services.CreateScope();
 scope.ServiceProvider.GetRequiredService<DataBaseInitializer>().Initialize();
 

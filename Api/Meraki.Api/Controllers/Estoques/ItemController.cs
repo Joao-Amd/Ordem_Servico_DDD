@@ -14,11 +14,11 @@ namespace Meraki.Api.Controllers.Estoques
     public class ItemController : ControllerMain
     {
         private readonly IAplicItem _aplicItem;
-        private readonly IRepBaseCadastros<Item> _repItem;
+        private readonly IRepBaseEstoque<Item> _repItem;
 
         public ItemController(INotification notificador,
                                     IAplicItem aplicItem,
-                                    IRepBaseCadastros<Item> repItem) : base(notificador)
+                                    IRepBaseEstoque<Item> repItem) : base(notificador)
         {
             _aplicItem = aplicItem;
             _repItem = repItem;
