@@ -3,6 +3,7 @@ using System;
 using Meraki.Cadastros.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Meraki.Cadastros.Data.Migrations
 {
     [DbContext(typeof(ContextCadastros))]
-    partial class ContextCadastrosModelSnapshot : ModelSnapshot
+    [Migration("20250923103919_ClienteIdentificador")]
+    partial class ClienteIdentificador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

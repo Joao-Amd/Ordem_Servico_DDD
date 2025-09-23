@@ -1,10 +1,11 @@
 ﻿using Meraki.Cadastros.Domain.Clientes.Enumeradores;
 using Meraki.Cadastros.Domain.Value_Objects;
+using Meraki.Core.Base;
 using Meraki.Core.Interfaces;
 
 namespace Meraki.Cadastros.Domain.Clientes
 {
-    public class Cliente : IAggregateRoot
+    public class Cliente : Identificador, IAggregateRoot
     {
         public Cliente(){ }
         protected Cliente(string nome,

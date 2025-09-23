@@ -1,7 +1,6 @@
 ﻿using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Data.Patterns;
 using Meraki.Estoque.Aplication.Itens.Dtos;
-using Meraki.Estoque.Aplication.Itens.ViewModels;
 using Meraki.Estoque.Domain.Itens;
 using Meraki.Estoque.Domain.Unidades;
 
@@ -31,8 +30,7 @@ namespace Meraki.Estoque.Aplication.Itens
             item.Atualizar(
                 itemDto.Descricao,
                 itemDto.Preco,
-                itemDto.IdUnidade,
-                itemDto.Ativo);
+                itemDto.IdUnidade);
 
             await unitOfWork.CommitAsync();
         }
@@ -43,14 +41,22 @@ namespace Meraki.Estoque.Aplication.Itens
             if (unidade == null)
                 throw new KeyNotFoundException($"Unidade não encontrada para o Id {itemDto.IdUnidade} informado.");
 
-            var item = Item.Criar(
-                itemDto.Identificacao,
-                itemDto.Descricao,
-                itemDto.Preco,
-                unidade);
+            var item = Item.Criar(itemDto.Descricao, itemDto.Preco, unidade);
 
            await _repositorioItem.InserirAsync(item);
            await unitOfWork.CommitAsync();
+        }
+
+        public async Task AtivarInativar(Guid iditem)
+        {
+            var item = await _repositorioItem.GetByIdAsync(iditem);
+
+            if (item == null)
+                throw new KeyNotFoundException($"Item não encontrado para o Id {iditem} informado.");
+
+            item.AtivarInativar();
+
+            await unitOfWork.CommitAsync();
         }
     }
 }

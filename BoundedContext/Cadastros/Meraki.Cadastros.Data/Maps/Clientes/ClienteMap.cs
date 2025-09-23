@@ -31,6 +31,11 @@ namespace Meraki.Cadastros.Data.Maps.Clientes
                     .HasMaxLength(11)
                     .IsRequired();
             });
+
+            builder.Property(e => e.Identificacao)
+                .HasColumnName("identificacao")
+                .ValueGeneratedOnAdd();
+
         }
     }
 }

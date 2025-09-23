@@ -11,6 +11,7 @@ using System.Net;
 
 namespace Meraki.Api.Controllers.Estoques
 {
+    [Route("Estoque")]
     public class EstoqueController : ControllerMain
     {
         private readonly IRepBaseEstoque<ItemEstoque> _repItemEstoque;

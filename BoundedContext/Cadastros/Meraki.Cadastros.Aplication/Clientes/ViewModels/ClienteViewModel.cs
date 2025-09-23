@@ -7,6 +7,7 @@ namespace Meraki.Cadastros.Aplication.Clientes.ViewModels
     public class ClienteViewModel
     {
         public Guid Id { get; set; }
+        public int Identificacao { get; set; }
         public string Nome { get; set; }
         public EnumTipoPessoa TipoPessoa { get; set; }
         [MapFrom("Cpf.Numero")]

@@ -4,7 +4,8 @@ namespace Meraki.Estoque.Aplication.Itens
 {
     public interface IAplicItem
     {
-        public Task Inserir(ItemDto itemDto);
-        public Task Atualizar(Guid idItem, ItemDto itemDto);
+        Task Inserir(ItemDto itemDto);
+        Task Atualizar(Guid idItem, ItemDto itemDto);
+        Task AtivarInativar(Guid iditem);
     }
 }

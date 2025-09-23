@@ -11,6 +11,7 @@ using System.Net;
 
 namespace Meraki.Api.Controllers.Estoques
 {
+    [Route("Item")]
     public class ItemController : ControllerMain
     {
         private readonly IAplicItem _aplicItem;
@@ -53,5 +54,12 @@ namespace Meraki.Api.Controllers.Estoques
             await _aplicItem.Atualizar(idItem, dto);
             return CustomResponse(HttpStatusCode.OK);
         }
-     }
+
+        [HttpPut("AtivarInativar{idItem}")]
+        public async Task<ActionResult> AtivarInativar([FromRoute] Guid idItem)
+        {
+            await _aplicItem.AtivarInativar(idItem);
+            return CustomResponse(HttpStatusCode.OK);
+        }
+    }
 }

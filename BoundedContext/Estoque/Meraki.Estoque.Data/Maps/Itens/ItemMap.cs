@@ -13,9 +13,9 @@ namespace Meraki.Estoque.Data.Maps.Itens
 
             builder.Property(p => p.Id).HasColumnName("id").ValueGeneratedNever();
 
-            builder.Property(p => p.Identificacao)
+            builder.Property(e => e.Identificacao)
                 .HasColumnName("identificacao")
-                .IsRequired();
+                .ValueGeneratedOnAdd();
 
             builder.Property(p => p.Ativo)
                 .HasColumnName("ativo")

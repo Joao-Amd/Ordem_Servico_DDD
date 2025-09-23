@@ -3,12 +3,18 @@
     public class Notification : INotification
     {
         public bool Notified { get; private set; }
-        public List<string> Message { get; private set; } = new List<string>();
+        public List<string> Message { get; private set; } = [];
 
-        public void ToAddNotification (string mensagem)
+        public void ToAddNotification (string mensage)
         {
             Notified = true;
-            Message.Add(mensagem);
+            Message.Add(mensage);
+        }
+
+        public void ToAddNotifications(List<string> mensages)
+        {
+            Notified = true;
+            Message.AddRange(mensages);
         }
 
         public void ClearNotification()
