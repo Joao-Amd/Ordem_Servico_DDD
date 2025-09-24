@@ -10,4 +10,9 @@
     <ProjectReference Include="..\..\Core\Meraki.Core\Meraki.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Itens\Specifications\" />
+    <Folder Include="Itens\Validations\" />
+  </ItemGroup>
+
 </Project>

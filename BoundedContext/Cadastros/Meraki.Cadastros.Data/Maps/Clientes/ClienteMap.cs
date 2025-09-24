@@ -20,6 +20,10 @@ namespace Meraki.Cadastros.Data.Maps.Clientes
                 .HasMaxLength(200)
                 .IsRequired();
 
+            builder.Property(p => p.Ativo)
+                .HasColumnName("ativo")
+                .IsRequired();
+
             builder.Property(p => p.TipoPessoa)
                 .HasColumnName("tipo_pessoa")
                 .IsRequired();

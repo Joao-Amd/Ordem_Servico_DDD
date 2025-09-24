@@ -1,6 +1,7 @@
 ﻿using Meraki.Cadastros.Data.Base;
 using Meraki.Cadastros.Data.Patterns;
 using Meraki.Estoque.Aplication.Itens.Dtos;
+using Meraki.Estoque.Domain.Estoques;
 using Meraki.Estoque.Domain.Itens;
 using Meraki.Estoque.Domain.Unidades;
 
@@ -10,15 +11,18 @@ namespace Meraki.Estoque.Aplication.Itens
     {
         private readonly IRepBaseEstoque<Item> _repositorioItem;
         private readonly IRepBaseEstoque<Unidade> _repositorioUnidade;
-        private readonly IUnitOfWorkEstoque unitOfWork;
+        private readonly IRepBaseEstoque<ItemEstoque> _repItemEstoque;
+        private readonly IUnitOfWorkEstoque _unitOfWork;
 
         public AplicItem(IRepBaseEstoque<Item> repositorioItem,
             IRepBaseEstoque<Unidade> repositorioUnidade,
-            IUnitOfWorkEstoque unitOfWork)
+            IUnitOfWorkEstoque unitOfWork,
+            IRepBaseEstoque<ItemEstoque> repItemEstoque)
         {
             _repositorioItem = repositorioItem;
             _repositorioUnidade = repositorioUnidade;
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
+            _repItemEstoque = repItemEstoque;
         }
 
         public async Task Atualizar(Guid idItem, ItemDto itemDto)
@@ -32,7 +36,7 @@ namespace Meraki.Estoque.Aplication.Itens
                 itemDto.Preco,
                 itemDto.IdUnidade);
 
-            await unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task Inserir(ItemDto itemDto)
@@ -44,7 +48,7 @@ namespace Meraki.Estoque.Aplication.Itens
             var item = Item.Criar(itemDto.Descricao, itemDto.Preco, unidade);
 
            await _repositorioItem.InserirAsync(item);
-           await unitOfWork.CommitAsync();
+           await _unitOfWork.CommitAsync();
         }
 
         public async Task AtivarInativar(Guid iditem)
@@ -54,9 +58,14 @@ namespace Meraki.Estoque.Aplication.Itens
             if (item == null)
                 throw new KeyNotFoundException($"Item não encontrado para o Id {iditem} informado.");
 
+            var itemEstoque = _repItemEstoque.FirstOrDefault(e => e.IdItem == iditem);
+
+            if (itemEstoque?.Saldo > 0)
+                throw new InvalidOperationException("Não é possível inativar o item pois existe saldo em estoque.");
+
             item.AtivarInativar();
 
-            await unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Meraki.Core\Meraki.Core.csproj" />
+  </ItemGroup>
+
 </Project>

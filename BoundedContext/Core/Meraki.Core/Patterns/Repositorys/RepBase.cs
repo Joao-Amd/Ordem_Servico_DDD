@@ -1,5 +1,4 @@
 ﻿using Meraki.Core.Base.QuerysParams;
-using Meraki.Core.Interfaces;
 using Meraki.Core.Mappers;
 using Meraki.Core.Patterns.Repositorys;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +66,28 @@ namespace Meraki.Cadastros.Data.Patterns
         public async Task InserirAsync(List<T> entitys)
         {
             await _dbSet.AddRangeAsync(entitys);
+        }
+
+        public IQueryable<T> Include(params string[] includes)
+        {
+            IQueryable<T> queryable = _dbSet.AsQueryable();
+
+            foreach (string navigationPropertyPath in includes)
+            {
+                queryable = queryable.Include(navigationPropertyPath);
+            }
+
+            return queryable;
+        }
+
+        public IQueryable<T> Where(Expression<Func<T, bool>> exp)
+        {
+            return _dbSet.Where(exp);
+        }
+
+        public T? FirstOrDefault(Expression<Func<T, bool>> exp)
+        {
+            return _dbSet.FirstOrDefault(exp);
         }
 
         public async Task<List<TView>> ListarPaginadoAsync<TView>(QueryParams queryParams)
